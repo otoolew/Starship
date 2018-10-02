@@ -1,7 +1,7 @@
 ﻿// ----------------------------------------------------------------------------
-// Author:  William O'Toole
-// Project: BitRivet Framework
-// Date:    13 JUNE 2018
+//  William O'Toole 
+//  Project: Starship
+//  SEPT 2018
 // ----------------------------------------------------------------------------
 using UnityEngine;
 using UnityEngine.UI;

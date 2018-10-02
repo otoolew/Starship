@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿// ----------------------------------------------------------------------------
+//  William O'Toole 
+//  Project: Starship
+//  OCT 2018
+// ----------------------------------------------------------------------------
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,24 +12,15 @@ public class NPCWeaponController : MonoBehaviour
     public List<Weapon> WeaponList;
     public int weaponIndex;
     public Transform weaponMount;
-    //public Weapon LoadedWeapon;
 
-    //[SerializeField]
-    //public bool _weaponReady;
-    //public bool WeaponReady
-    //{
-    //    get
-    //    {
-    //        if (LoadedWeapon.WeaponTimer <= 0)
-    //        {
-    //            LoadedWeapon.WeaponTimer = LoadedWeapon.WeaponCooldown;
-    //            _weaponReady = true;
-    //            return _weaponReady;
-    //        }
-    //        _weaponReady = false;
-    //        return _weaponReady;
-    //    }
-    //}
+    [SerializeField]
+    private bool weaponInRange;
+    public bool WeaponInRange
+    {
+        get { return weaponInRange; }
+        set { weaponInRange = value; }
+    }
+
     private void Awake()
     {
         WeaponList = new List<Weapon>();
@@ -72,20 +67,7 @@ public class NPCWeaponController : MonoBehaviour
         };
         return weapon;
     }
-    /// <summary>
-    /// Initializes the current active weapon from the list
-    /// </summary>
-    /// <param name="weapon"></param>
-    //public void LoadWeapon(Weapon weapon)
-    //{
-    //    LoadedWeapon.WeaponPrefab = weapon.WeaponPrefab;
-    //    LoadedWeapon.WeaponName = weapon.WeaponName;
-    //    LoadedWeapon.MunitionPrefab = weapon.MunitionPrefab;
-    //    LoadedWeapon.WeaponRange = weapon.WeaponRange;
-    //    LoadedWeapon.WeaponPower = weapon.WeaponPower;
-    //    LoadedWeapon.WeaponCooldown = weapon.WeaponCooldown;
-    //    LoadedWeapon.WeaponTimer = weapon.WeaponCooldown;       
-    //}
+
     private void CooldownWeapons()
     {
         foreach (var item in WeaponList)

@@ -1,5 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// ----------------------------------------------------------------------------
+//  William O'Toole 
+//  Project: Starship
+//  SEPT 2018
+// ----------------------------------------------------------------------------
 using UnityEngine;
 
 /// <summary>

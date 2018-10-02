@@ -1,67 +1,71 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// ----------------------------------------------------------------------------
+//  William O'Toole 
+//  Project: Starship
+//  SEPT 2018
+// ----------------------------------------------------------------------------
 using UnityEngine;
 
-public class ShipMovement : MonoBehaviour {
+public class ShipMovement : MonoBehaviour
+{
 
     private Rigidbody rigidBody;
     [SerializeField]
-    private float _rotationRate;
+    private float rotationRate;
     public float RotationRate
     {
-        get { return _rotationRate; }
-        set { _rotationRate = value; }
+        get { return rotationRate; }
+        set { rotationRate = value; }
     }
 
     [SerializeField]
-    private float _maxVelocity;
+    private float maxVelocity;
     public float MaxVelocity
     {
-        get { return _maxVelocity; }
-        set { _maxVelocity = value; }
+        get { return maxVelocity; }
+        set { maxVelocity = value; }
     }
 
     [SerializeField]
-    private float _thrustPower;
+    private float thrustPower;
     public float ThrustPower
     {
-        get { return _thrustPower; }
-        set { _thrustPower = value; }
+        get { return thrustPower; }
+        set { thrustPower = value; }
     }
 
     [SerializeField]
-    private float _thrustInput;
+    private float thrustInput;
     public float ThrustInput
     {
-        get { return _thrustInput; }
-        set { _thrustInput = value; }
+        get { return thrustInput; }
+        set { thrustInput = value; }
     }
 
     [SerializeField]
-    private float _rotationInput;
+    private float rotationInput;
     public float RotationInput
     {
-        get { return _rotationInput; }
-        set { _rotationInput = value; }
+        get { return rotationInput; }
+        set { rotationInput = value; }
     }
 
     [SerializeField]
-    private Vector2 _axisInput;
+    private Vector2 axisInput;
     public Vector2 AxisInput
     {
         get
         {
-            _axisInput.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            return _axisInput;
+            axisInput.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            return axisInput;
         }
-        private set { _axisInput = value; }
+        private set { axisInput = value; }
     }
     [SerializeField]
-    private Vector3 _eulerAngleVelocity;
+    private Vector3 eulerAngleVelocity;
     public Vector3 EulerAngleVelocity
     {
-        get { return _eulerAngleVelocity; }
-        set { _eulerAngleVelocity = value; }
+        get { return eulerAngleVelocity; }
+        set { eulerAngleVelocity = value; }
     }
     // Use this for initialization
     void Start () {

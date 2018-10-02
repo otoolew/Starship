@@ -20,11 +20,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4956959916098762}
   - component: {fileID: 54028976947782146}
-  - component: {fileID: 114575960498772782}
   - component: {fileID: 135893692926509806}
+  - component: {fileID: 114383174296289668}
+  - component: {fileID: 114575960498772782}
+  - component: {fileID: 114273752815500386}
   m_Layer: 0
   m_Name: EnemyShip
-  m_TagString: Untagged
+  m_TagString: Hostile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,7 +118,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!95 &95786026106271684
 Animator:
@@ -136,6 +138,38 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114273752815500386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1004375974823794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf32ed9be507dd4a990a98c57a63387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSystems:
+  - {fileID: 11400000, guid: 28548b222055a6a4ab1e8e75cd881a6b, type: 2}
+  - {fileID: 11400000, guid: 24d062e46f540594891b770fe7c16502, type: 2}
+  WeaponList: []
+  weaponIndex: 0
+  weaponMount: {fileID: 0}
+  weaponInRange: 0
+--- !u!114 &114383174296289668
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1004375974823794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11f5f9201133cb4faeaf7da01cb9c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NPCName: XD-1
+  shipController: {fileID: 114575960498772782}
+  weaponController: {fileID: 114273752815500386}
 --- !u!114 &114575960498772782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,12 +181,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c089e71c3a597e4c8c7c57ecdd4507d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationRate: 1
-  _maxVelocity: 2
-  _thrustPower: 2
-  _eulerAngleVelocity: {x: 0, y: 0, z: 0}
+  rotationRate: 90
+  maxVelocity: 2
+  thrustPower: 2
   target: {fileID: 0}
-  EngagementRange: 5
+  EngagementRange: 2
   timer: 0
   pace: 0.25
 --- !u!135 &135893692926509806

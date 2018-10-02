@@ -1,32 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// ----------------------------------------------------------------------------
+//  William O'Toole 
+//  Project: Starship
+//  SEPT 2018
+// ----------------------------------------------------------------------------
 using UnityEngine;
 
 public class NPCShipController : MonoBehaviour
 {
     private Rigidbody rigidBody;
     [SerializeField]
-    private float _rotationRate;
+    private float rotationRate;
     public float RotationRate
     {
-        get { return _rotationRate; }
-        set { _rotationRate = value; }
+        get { return rotationRate; }
+        set { rotationRate = value; }
     }
 
     [SerializeField]
-    private float _maxVelocity;
+    private float maxVelocity;
     public float MaxVelocity
     {
-        get { return _maxVelocity; }
-        set { _maxVelocity = value; }
+        get { return maxVelocity; }
+        set { maxVelocity = value; }
     }
 
     [SerializeField]
-    private float _thrustPower;
+    private float thrustPower;
     public float ThrustPower
     {
-        get { return _thrustPower; }
-        set { _thrustPower = value; }
+        get { return thrustPower; }
+        set { thrustPower = value; }
     }
 
     public Transform target;
