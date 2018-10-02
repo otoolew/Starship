@@ -13,6 +13,14 @@ public class NPCWeaponController : MonoBehaviour
     public int weaponIndex;
     public Transform weaponMount;
 
+    [SerializeField]
+    private bool weaponInRange;
+    public bool WeaponInRange
+    {
+        get { return weaponInRange; }
+        set { weaponInRange = value; }
+    }
+
     private void Awake()
     {
         WeaponList = new List<Weapon>();
@@ -59,20 +67,7 @@ public class NPCWeaponController : MonoBehaviour
         };
         return weapon;
     }
-    /// <summary>
-    /// Initializes the current active weapon from the list
-    /// </summary>
-    /// <param name="weapon"></param>
-    //public void LoadWeapon(Weapon weapon)
-    //{
-    //    LoadedWeapon.WeaponPrefab = weapon.WeaponPrefab;
-    //    LoadedWeapon.WeaponName = weapon.WeaponName;
-    //    LoadedWeapon.MunitionPrefab = weapon.MunitionPrefab;
-    //    LoadedWeapon.WeaponRange = weapon.WeaponRange;
-    //    LoadedWeapon.WeaponPower = weapon.WeaponPower;
-    //    LoadedWeapon.WeaponCooldown = weapon.WeaponCooldown;
-    //    LoadedWeapon.WeaponTimer = weapon.WeaponCooldown;       
-    //}
+
     private void CooldownWeapons()
     {
         foreach (var item in WeaponList)

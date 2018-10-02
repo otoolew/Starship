@@ -11,72 +11,72 @@ public class Weapon
     //public WeaponSystem weaponSystem;
 
     [SerializeField]
-    private GameObject _weaponPrefab;
+    private GameObject weaponPrefab;
     public GameObject WeaponPrefab
     {
-        get { return _weaponPrefab; }
-        set { _weaponPrefab = value; }
+        get { return weaponPrefab; }
+        set { weaponPrefab = value; }
     }
 
     [SerializeField]
-    private GameObject _munitionPrefab;
+    private GameObject munitionPrefab;
     public GameObject MunitionPrefab
     {
-        get { return _munitionPrefab; }
-        set { _munitionPrefab = value; }
+        get { return munitionPrefab; }
+        set { munitionPrefab = value; }
     }
 
     [SerializeField]
-    private string _weaponName;
+    private string weaponName;
     public string WeaponName
     {
-        get { return _weaponName; }
-        set { _weaponName = value; }
+        get { return weaponName; }
+        set { weaponName = value; }
     }
 
     [SerializeField]
-    private float _weaponRange;
+    private float weaponRange;
     public float WeaponRange
     {
-        get { return _weaponRange; }
-        set { _weaponRange = value; }
+        get { return weaponRange; }
+        set { weaponRange = value; }
     }
 
     [SerializeField]
-    private float _weaponPower;
+    private float weaponPower;
     public float WeaponPower
     {
-        get { return _weaponPower; }
-        set { _weaponPower = value; }
+        get { return weaponPower; }
+        set { weaponPower = value; }
     }
 
     [SerializeField]
-    private float _weaponCooldown;
+    private float weaponCooldown;
     public float WeaponCooldown
     {
-        get { return _weaponCooldown; }
-        set { _weaponCooldown = value; }
+        get { return weaponCooldown; }
+        set { weaponCooldown = value; }
     }
 
     [SerializeField]
-    private float _weaponTimer;
+    private float weaponTimer;
     public float WeaponTimer
     {
-        get { return _weaponTimer; }
-        set { _weaponTimer = value; }
+        get { return weaponTimer; }
+        set { weaponTimer = value; }
     }
     [SerializeField]
-    private bool _triggerTime;
+    private bool triggerTime;
     public bool TriggerTime
     {
-        get { return _triggerTime; }
-        set { _triggerTime = value; }
+        get { return triggerTime; }
+        set { triggerTime = value; }
     }
     [SerializeField]
-    private bool _weaponReady;
+    private bool weaponReady;
     public bool WeaponReady
     {
-        get { return _weaponReady; }
-        set { _weaponReady = value; }
+        get { return weaponReady; }
+        set { weaponReady = value; }
     }
 }
