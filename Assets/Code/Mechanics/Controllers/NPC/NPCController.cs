@@ -1,11 +1,12 @@
 ﻿// ----------------------------------------------------------------------------
 //  William O'Toole 
 //  Project: Starship
-//  SEPT 2018
+//  OCT 2018
 // ----------------------------------------------------------------------------
 using UnityEngine;
 
-public class NPCController : MonoBehaviour {
+public class NPCController : MonoBehaviour
+{
     public string NPCName;
 
     [SerializeField]
