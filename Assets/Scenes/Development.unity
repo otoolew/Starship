@@ -130,7 +130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &19288670
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -290,6 +290,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &728897946 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4621697670914182, guid: 17bb232790f26854595078c0033dc72a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1102290251}
 --- !u!1 &813017453
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,6 +323,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &979093358 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1081127686894954, guid: 17bb232790f26854595078c0033dc72a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1102290251}
+--- !u!114 &979093362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 979093358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e6bf1d5015daf468cc705532c29d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireWeaponKey: 32
+  weaponSystems:
+  - {fileID: 11400000, guid: 28548b222055a6a4ab1e8e75cd881a6b, type: 2}
+  - {fileID: 11400000, guid: 24d062e46f540594891b770fe7c16502, type: 2}
+  LoadedWeapon:
+    _weaponPrefab: {fileID: 0}
+    _munitionPrefab: {fileID: 0}
+    _weaponName: 
+    _weaponRange: 0
+    _weaponPower: 0
+    _weaponCooldown: 0
+    _weaponTimer: 0
+    _triggerTime: 0
+    _weaponReady: 0
+  weaponMount: {fileID: 728897946}
 --- !u!1001 &1102290251
 Prefab:
   m_ObjectHideFlags: 0
@@ -357,9 +393,23 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1081127686894954, guid: 17bb232790f26854595078c0033dc72a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406016727941418, guid: 17bb232790f26854595078c0033dc72a, type: 2}
+      propertyPath: m_Name
+      value: WeaponMount
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114423879258508574, guid: 17bb232790f26854595078c0033dc72a, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 17bb232790f26854595078c0033dc72a, type: 2}
   m_IsPrefabAsset: 0
+--- !u!4 &1102290252 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4426779474422262, guid: 17bb232790f26854595078c0033dc72a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1102290251}
 --- !u!1 &1504525094
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,6 +496,10 @@ Prefab:
       propertyPath: m_TagString
       value: Hostile
       objectReference: {fileID: 0}
+    - target: {fileID: 1004375974823794, guid: 4e0dd573d5034a2419af4a403cd6f7dd, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e0dd573d5034a2419af4a403cd6f7dd, type: 2}
   m_IsPrefabAsset: 0
@@ -459,6 +513,7 @@ GameObject:
   - component: {fileID: 1784016637}
   - component: {fileID: 1784016636}
   - component: {fileID: 1784016635}
+  - component: {fileID: 1784016638}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -482,7 +537,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -519,13 +574,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1784016634}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1784016638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1784016634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22acaa53b0cfe9b43b55b93b4f4b5103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1102290252}
+  cameraSettings: {fileID: 11400000, guid: 89f70bb3613ab2d4b9e59433d3eb30f7, type: 2}
 --- !u!1 &1911752774
 GameObject:
   m_ObjectHideFlags: 0

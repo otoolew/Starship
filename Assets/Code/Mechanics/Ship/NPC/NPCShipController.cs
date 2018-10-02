@@ -48,7 +48,7 @@ public class NPCShipController : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        var distance = Vector2.Distance(target.position, transform.position);
+        
         if (((Vector2.Distance(target.position, transform.position)) > EngagementRange) && (timer > pace))
         {
             Accelerate();

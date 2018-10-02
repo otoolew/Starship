@@ -16,9 +16,9 @@ public class HealthController : MonoBehaviour {
         private set { currentHealth = value; }
     }
 
-    private bool isDead;
+
     /// <summary>
-    /// Is the intance dead
+    /// Is the instance dead
     /// </summary>
     public bool IsDead
     {
@@ -28,8 +28,7 @@ public class HealthController : MonoBehaviour {
                 return true;
             else
                 return false;
-        }
-        private set { isDead = value; }
+        }        
     }
     public UnityEvent onDeath;
     // Use this for initialization
