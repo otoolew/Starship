@@ -5,8 +5,6 @@ using UnityEngine;
 public class ShipMovement : MonoBehaviour {
 
     private Rigidbody rigidBody;
-
-
     [SerializeField]
     private float _rotationRate;
     public float RotationRate
@@ -58,11 +56,17 @@ public class ShipMovement : MonoBehaviour {
         }
         private set { _axisInput = value; }
     }
-    Vector3 m_EulerAngleVelocity;
+    [SerializeField]
+    private Vector3 _eulerAngleVelocity;
+    public Vector3 EulerAngleVelocity
+    {
+        get { return _eulerAngleVelocity; }
+        set { _eulerAngleVelocity = value; }
+    }
     // Use this for initialization
     void Start () {
         rigidBody = GetComponent<Rigidbody>();
-        m_EulerAngleVelocity = new Vector3(0, RotationRate, 0);
+        EulerAngleVelocity = new Vector3(0, RotationRate, 0);
     }
     private void Update()
     {
@@ -90,9 +94,9 @@ public class ShipMovement : MonoBehaviour {
 
     private void Turn()
     {
-        Quaternion rotation = Quaternion.Euler(m_EulerAngleVelocity * RotationInput * Time.deltaTime);
+        Quaternion rotation = Quaternion.Euler(EulerAngleVelocity * RotationInput * Time.deltaTime);
         rigidBody.MoveRotation(rigidBody.rotation * rotation);
-        //rigidBody.MoveRotation(rigidBody.rotation + -RotationInput * RotationRate * Time.fixedDeltaTime);
     }
+
 }
 
