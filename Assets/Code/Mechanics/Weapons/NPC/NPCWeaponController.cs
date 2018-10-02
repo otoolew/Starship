@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿// ----------------------------------------------------------------------------
+//  William O'Toole 
+//  Project: Starship
+//  OCT 2018
+// ----------------------------------------------------------------------------
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,24 +12,7 @@ public class NPCWeaponController : MonoBehaviour
     public List<Weapon> WeaponList;
     public int weaponIndex;
     public Transform weaponMount;
-    //public Weapon LoadedWeapon;
 
-    //[SerializeField]
-    //public bool _weaponReady;
-    //public bool WeaponReady
-    //{
-    //    get
-    //    {
-    //        if (LoadedWeapon.WeaponTimer <= 0)
-    //        {
-    //            LoadedWeapon.WeaponTimer = LoadedWeapon.WeaponCooldown;
-    //            _weaponReady = true;
-    //            return _weaponReady;
-    //        }
-    //        _weaponReady = false;
-    //        return _weaponReady;
-    //    }
-    //}
     private void Awake()
     {
         WeaponList = new List<Weapon>();

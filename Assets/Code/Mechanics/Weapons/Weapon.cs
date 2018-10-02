@@ -1,9 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿// ----------------------------------------------------------------------------
+//  William O'Toole 
+//  Project: Starship
+//  OCT 2018
+// ----------------------------------------------------------------------------
+using System;
 using UnityEngine;
 [Serializable]
-public class Weapon {
+public class Weapon
+{
     //public WeaponSystem weaponSystem;
 
     [SerializeField]
@@ -75,13 +79,4 @@ public class Weapon {
         get { return _weaponReady; }
         set { _weaponReady = value; }
     }
-    //public void LoadWeapon(WeaponSystem nextWeapon)
-    //{
-    //    WeaponName = weaponSystem.weaponName;
-    //    MunitionPrefab = weaponSystem.munitionPrefab;
-    //    WeaponRange = weaponSystem.weaponRange;
-    //    WeaponPower = weaponSystem.weaponPower;
-    //    WeaponCooldown = weaponSystem.weaponCooldown;
-    //    WeaponTimer = weaponSystem.weaponCooldown;
-    //}
 }
