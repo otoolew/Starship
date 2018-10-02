@@ -25,7 +25,7 @@ public class LaserBolt : MonoBehaviour {
     {
         transform.Translate(Vector3.forward * Time.deltaTime * boltSpeed); // Move Up over time by the speed
     }
-    private void OnTriggerEnter2D(Collider2D collisonObject)
+    private void OnTriggerEnter(Collider collisonObject)
     {
         foreach (var collisionTag in collisionTags)
         {
@@ -37,7 +37,7 @@ public class LaserBolt : MonoBehaviour {
                 }
                 catch (System.NullReferenceException)
                 {
-                    Debug.Log("LaserBolt:NullCatch");
+                    Debug.Log("LaserBolt:NullCatch => No HealthController");
                     Destroy(collisonObject.gameObject);
                 }
                 
@@ -46,3 +46,4 @@ public class LaserBolt : MonoBehaviour {
         }
     }
 }
+

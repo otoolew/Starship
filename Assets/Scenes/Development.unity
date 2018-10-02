@@ -194,7 +194,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 19288669}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.1, z: 0}
+  m_LocalPosition: {x: 0, y: -7.86, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -430,7 +430,21 @@ Prefab:
     - target: {fileID: 54028976947782146, guid: 4e0dd573d5034a2419af4a403cd6f7dd,
         type: 2}
       propertyPath: m_Constraints
-      value: 20
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575960498772782, guid: 4e0dd573d5034a2419af4a403cd6f7dd,
+        type: 2}
+      propertyPath: _rotationRate
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575960498772782, guid: 4e0dd573d5034a2419af4a403cd6f7dd,
+        type: 2}
+      propertyPath: EngagementRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004375974823794, guid: 4e0dd573d5034a2419af4a403cd6f7dd, type: 2}
+      propertyPath: m_TagString
+      value: Hostile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e0dd573d5034a2419af4a403cd6f7dd, type: 2}

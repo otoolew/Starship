@@ -5,7 +5,6 @@ using UnityEngine;
 public class NPCShipController : MonoBehaviour
 {
     private Rigidbody rigidBody;
-
     [SerializeField]
     private float _rotationRate;
     public float RotationRate
@@ -30,13 +29,6 @@ public class NPCShipController : MonoBehaviour
         set { _thrustPower = value; }
     }
 
-    [SerializeField]
-    private Vector3 _eulerAngleVelocity;
-    public Vector3 EulerAngleVelocity
-    {
-        get { return _eulerAngleVelocity; }
-        set { _eulerAngleVelocity = value; }
-    }
     public Transform target;
     public float EngagementRange;
     // Use this for initialization
@@ -52,13 +44,12 @@ public class NPCShipController : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-
     }
     // Update is called once per frame
     private void FixedUpdate()
     {
-        var distance = Vector3.Distance(target.position, transform.position);
-        if (((Vector3.Distance(target.position, transform.position)) > EngagementRange) && (timer>pace))
+        var distance = Vector2.Distance(target.position, transform.position);
+        if (((Vector2.Distance(target.position, transform.position)) > EngagementRange) && (timer > pace))
         {
             Accelerate();
             timer = 0;
@@ -79,16 +70,9 @@ public class NPCShipController : MonoBehaviour
 
     private void Turn()
     {
-        Vector3 targetDir = target.position - transform.position;
-
-        // The step size is equal to speed times frame time.
-        float step = RotationRate * Time.deltaTime;
-        Vector3 adjustedDir = new Vector3(0.0f, targetDir.y, 0.0f);
-        Vector3 newDir = Vector3.RotateTowards(transform.up, targetDir, step, 0.0f);
-        Debug.DrawRay(transform.position, newDir, Color.red);
-
-        // Move our position a step closer to the target.
-        transform.rotation = Quaternion.LookRotation(newDir);
-
+        Vector3 rotVector = target.transform.position - transform.position;
+        rotVector.y = 0f;
+        Quaternion newRotation = Quaternion.LookRotation(rotVector);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, Time.deltaTime * RotationRate);
     }
 }
