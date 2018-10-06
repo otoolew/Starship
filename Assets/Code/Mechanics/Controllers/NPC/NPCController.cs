@@ -4,11 +4,13 @@
 //  OCT 2018
 // ----------------------------------------------------------------------------
 using UnityEngine;
-
-public class NPCController : MonoBehaviour
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(NPCShipController))]
+[RequireComponent(typeof(NPCWeaponController))]
+public class NPCController : ActorController
 {
-    public string NPCName;
-
+    #region Variable Declarations
+    
     [SerializeField]
     private NPCShipController shipController;
     public NPCShipController ShipController
@@ -24,13 +26,50 @@ public class NPCController : MonoBehaviour
         get { return weaponController; }
         private set { weaponController = value; }
     }
+    [SerializeField]
+    private TargetController targetController;
+    public TargetController TargetController
+    {
+        get { return targetController; }
+        private set { targetController = value; }
+    }
+    public float Velocity
+    {
+        get
+        {
+            return GetComponent<Rigidbody>().velocity.magnitude;
+        }
+    }
+    #endregion
+    #region Events
+    public Events.EventNPCDeath onNPCDeath;
+    #endregion
+
+    #region EventHandlers
+
+    #endregion
+
     // Use this for initialization
     void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
+    #region Methods
+    //void Death()
+    //{
+    //    onNPCDeath.Invoke(this);
+    //}
+    private void OnDisable()
+    {
+        onNPCDeath.Invoke(this);
+    }
+    private void OnDestroy()
+    {
+        
+    }
+    #endregion
+    // Update is called once per frame
+    void Update () {
 		
 	}
+
 }

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4323053020352866}
   - component: {fileID: 135254078231093974}
   - component: {fileID: 114443802825865582}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MediumBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4804188998387808}
   - component: {fileID: 212340238789511528}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,9 +85,8 @@ MonoBehaviour:
   munitionRange: 1
   munitionSpeed: 10
   munitionDamage: 100
-  collisionTags:
-  - Enemy
-  ownerTag: 
+  OwnerTag: 
+  EnemyTag: 
 --- !u!135 &135254078231093974
 SphereCollider:
   m_ObjectHideFlags: 1

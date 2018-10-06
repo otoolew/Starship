@@ -39,10 +39,19 @@ public class NPCShipController : MonoBehaviour
     private float timer;
     public float pace;
 
+    [SerializeField]
+    private float currentVelocity;
+    public float CurrentVelocity
+    {
+        get { return currentVelocity; }
+        set { currentVelocity = value; }
+    }
+
+
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        target = FindObjectOfType<ShipMovement>().transform;
+        //target = FindObjectOfType<ShipMovement>().transform;
     }
     private void Update()
     {
@@ -51,14 +60,18 @@ public class NPCShipController : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        
-        if (((Vector2.Distance(target.position, transform.position)) > EngagementRange) && (timer > pace))
+        CurrentVelocity = rigidBody.velocity.magnitude;
+        if (target != null)
         {
-            Accelerate();
-            timer = 0;
+            if (((Vector2.Distance(target.position, transform.position)) > EngagementRange) && (timer > pace))
+            {
+                Accelerate();
+                timer = 0;
+            }
+
+            Turn();
         }
 
-        Turn();
     }
 
     private void Accelerate()

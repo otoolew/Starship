@@ -5,9 +5,8 @@
 // ----------------------------------------------------------------------------
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : ActorController
 {
-    public string PlayerName;
 
     [SerializeField]
     private ShipMovement shipController;

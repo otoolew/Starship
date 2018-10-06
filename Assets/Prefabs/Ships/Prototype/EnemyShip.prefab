@@ -24,9 +24,27 @@ GameObject:
   - component: {fileID: 114383174296289668}
   - component: {fileID: 114575960498772782}
   - component: {fileID: 114273752815500386}
+  - component: {fileID: 114091319997067268}
   m_Layer: 0
   m_Name: EnemyShip
-  m_TagString: Hostile
+  m_TagString: Ship
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1232484898900752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4361612662997320}
+  - component: {fileID: 135688640310088880}
+  - component: {fileID: 114887239637903584}
+  m_Layer: 0
+  m_Name: TargetSensor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,6 +66,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1521596619889310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4141726977353162}
+  - component: {fileID: 114321132003360300}
+  m_Layer: 0
+  m_Name: WeaponMount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1949097874790404
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,6 +98,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4141726977353162
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1521596619889310}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.241}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4956959916098762}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4200763609681656
 Transform:
   m_ObjectHideFlags: 1
@@ -91,6 +138,19 @@ Transform:
   m_Father: {fileID: 4956959916098762}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!4 &4361612662997320
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1232484898900752}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4956959916098762}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4956959916098762
 Transform:
   m_ObjectHideFlags: 1
@@ -98,10 +158,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1004375974823794}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 4.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4285609221681492}
+  - {fileID: 4141726977353162}
+  - {fileID: 4361612662997320}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -114,7 +176,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: Infinity
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -138,6 +200,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114091319997067268
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1004375974823794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb675e4feacd5d4495005b37a426635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcController: {fileID: 114383174296289668}
+  targetSensor: {fileID: 0}
+  currentTargetable: {fileID: 0}
+  trackedTargets: []
 --- !u!114 &114273752815500386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,6 +233,20 @@ MonoBehaviour:
   weaponIndex: 0
   weaponMount: {fileID: 0}
   weaponInRange: 0
+--- !u!114 &114321132003360300
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1521596619889310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63c419b6bc3e3c24ea85ea2f4749f24d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Owner: 
+  TeamName: 
+  controller: {fileID: 114383174296289668}
 --- !u!114 &114383174296289668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -167,9 +258,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11f5f9201133cb4faeaf7da01cb9c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NPCName: XD-1
+  ActorName: XD-1
+  faction: {fileID: 11400000, guid: c98d17b1fc9e79e4e9d81314aff5e962, type: 2}
   shipController: {fileID: 114575960498772782}
   weaponController: {fileID: 114273752815500386}
+  targetController: {fileID: 0}
+  onNPCDeath:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Events+EventNPCDeath, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114575960498772782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -188,6 +286,39 @@ MonoBehaviour:
   EngagementRange: 2
   timer: 0
   pace: 0.25
+  currentVelocity: 0
+--- !u!114 &114887239637903584
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1232484898900752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a18449343390d694f91ae6af9f7b7da0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetController: {fileID: 114091319997067268}
+  sensorRange: 2
+  factionAlignment: {fileID: 0}
+  enemyFactions: []
+  onValidTargetFound:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Events+EventValidTargetScan, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!135 &135688640310088880
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1232484898900752}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135893692926509806
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -198,7 +329,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.19
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &212332617052929758
 SpriteRenderer:

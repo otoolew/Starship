@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class ShipMovement : MonoBehaviour
 {
-
     private Rigidbody rigidBody;
     [SerializeField]
     private float rotationRate;

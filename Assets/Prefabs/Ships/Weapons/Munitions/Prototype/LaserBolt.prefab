@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4394096268246364}
   - component: {fileID: 136420131013457104}
   - component: {fileID: 114145580948514030}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LaserBolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4490680018809990}
   - component: {fileID: 212133868927273176}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,9 +85,8 @@ MonoBehaviour:
   munitionRange: 2
   munitionSpeed: 10
   munitionDamage: 50
-  collisionTags:
-  - Enemy
-  ownerTag: 
+  OwnerTag: 
+  EnemyTag: 
 --- !u!136 &136420131013457104
 CapsuleCollider:
   m_ObjectHideFlags: 1
