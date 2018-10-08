@@ -9,5 +9,6 @@ public abstract class ActorController : MonoBehaviour
 {
     //TODO: ScriptableObject Data Container
     public string ActorName;
-    public Faction faction;
+    public FactionAlignment factionAlignment;
+    public Events.EventTargetDeath onTargetDeath;
 }

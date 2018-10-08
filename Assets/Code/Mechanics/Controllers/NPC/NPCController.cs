@@ -42,7 +42,7 @@ public class NPCController : ActorController
     }
     #endregion
     #region Events
-    public Events.EventNPCDeath onNPCDeath;
+
     #endregion
 
     #region EventHandlers
@@ -60,7 +60,7 @@ public class NPCController : ActorController
     //}
     private void OnDisable()
     {
-        onNPCDeath.Invoke(this);
+        onTargetDeath.Invoke(this);
     }
     private void OnDestroy()
     {

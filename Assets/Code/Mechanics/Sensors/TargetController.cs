@@ -40,7 +40,7 @@ public class TargetController : MonoBehaviour
         targetSensor = GetComponentInChildren<TargetSensor>();
 
         targetSensor.onValidTargetFound.AddListener(HandleValidTargetFound);
-        npcController.onNPCDeath.AddListener(HandleTargetLost);
+        //npcController.onTargetDeath.AddListener(HandleTargetLost);
     }
     #endregion
 
@@ -52,16 +52,19 @@ public class TargetController : MonoBehaviour
         if (trackedTargets.Contains(target))
             return;
 
-        Debug.Log(npcController.ActorName + " [TargetSensor] Found a target.");
+        
         if (IsTargetableValid(target))
         {
             trackedTargets.Add(target);
+            target.onTargetDeath.AddListener(HandleTargetLost);
+            Debug.Log(npcController.ActorName + " [TargetSensor] Found a target.");
         }          
     }
 
     public void HandleTargetLost(ActorController target)
     {
         trackedTargets.Remove(target);
+        
         Debug.Log(npcController.ActorName + " [TargetSensor] Lost a target.");
     }
 
@@ -95,21 +98,15 @@ public class TargetController : MonoBehaviour
         {
             return false;
         }
-        string targetFaction = target.faction.FactionName;
-        foreach (var enemyFaction in npcController.faction.enemies)
-        {
-            if (enemyFaction.FactionName.Equals(targetFaction))
-            {
-                Debug.Log("[TargetController] confirmed target is Hostile!");
-                return true; 
-            }
-        }
         Debug.Log("[TargetController] target is not hostile.");
-        return false;
+        return npcController.factionAlignment.CanHarm(target.factionAlignment);
     }
     #endregion
 
+    public void LostTarget(ActorController target)
+    {
 
+    }
     private void Update()
     {
 

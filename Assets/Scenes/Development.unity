@@ -233,7 +233,6 @@ MonoBehaviour:
   targetController: {fileID: 1339834010}
   sensorRange: 2
   factionAlignment: {fileID: 0}
-  enemyFactions: []
   onValidTargetFound:
     m_PersistentCalls:
       m_Calls: []
@@ -310,6 +309,12 @@ Prefab:
       propertyPath: targetSensor
       value: 
       objectReference: {fileID: 1047286700}
+    - target: {fileID: 114383174296289668, guid: 4e0dd573d5034a2419af4a403cd6f7dd,
+        type: 2}
+      propertyPath: factionAlignment
+      value: 
+      objectReference: {fileID: 11400000, guid: c98d17b1fc9e79e4e9d81314aff5e962,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e0dd573d5034a2419af4a403cd6f7dd, type: 2}
   m_IsPrefabAsset: 0
@@ -635,6 +640,11 @@ Prefab:
         type: 2}
       propertyPath: faction
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114161965296015094, guid: 17bb232790f26854595078c0033dc72a,
+        type: 2}
+      propertyPath: factionAlignment
+      value: 
       objectReference: {fileID: 11400000, guid: 4c0b2cc91b9a13b4695c46e79db4af7a,
         type: 2}
     m_RemovedComponents: []
@@ -773,10 +783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63c419b6bc3e3c24ea85ea2f4749f24d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Owner: 
-  FactionName: 
-  DestroyList: []
-  controller: {fileID: 1339834013}
+  factionAlignment: {fileID: 0}
 --- !u!1 &1339834009
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,15 +874,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActorName: Ally
-  faction: {fileID: 11400000, guid: 3f973c4e89972644da1c76ade14443ab, type: 2}
+  factionAlignment: {fileID: 11400000, guid: 44420e0564e6a4c4d92f77c460b9ecaf, type: 2}
+  onTargetDeath:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Events+EventTargetDeath, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   shipController: {fileID: 1339834012}
   weaponController: {fileID: 1339834011}
   targetController: {fileID: 1339834010}
-  onNPCDeath:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: Events+EventNPCDeath, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!135 &1339834014
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -27,13 +27,7 @@ public class TargetSensor : MonoBehaviour
         get { return factionAlignment; }
         protected set { factionAlignment = value; }
     }
-    [SerializeField]
-    private List<Faction> enemyFactions = new List<Faction>();
-    public List<Faction> EnemyFactions
-    {
-        get { return enemyFactions; }
-        protected set { enemyFactions = value; }
-    }
+
     #endregion
     #region Events
     public Events.EventValidTargetScan onValidTargetFound;
@@ -43,8 +37,7 @@ public class TargetSensor : MonoBehaviour
     private void Start()
     {
         targetController = GetComponentInParent<TargetController>();
-        enemyFactions = GetComponentInParent<NPCController>().faction.enemies;
-        //enemyFactions = factionAlignment.faction.enemies;
+
     }
     #endregion
     #region Methods

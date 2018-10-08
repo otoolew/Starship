@@ -17,14 +17,12 @@ public class Munition : MonoBehaviour
     [Header("How much damage do I do?")]
     public float munitionDamage;
     [Header("Who do I belong to?")]
-    public string FactionTag;
-    [Header("Who do I hit?")]
-    public Faction[] EnemyFactions;
-    public Events.EventNPCDeath onNPCDeath;
+    public FactionAlignment factionAlignment;
+
     // Use this for initialization
     private void Start()
     {
-        EnemyFactions = GetComponentInParent<WeaponMount>().DestroyList.ToArray();
+        factionAlignment = GetComponentInParent<WeaponMount>().factionAlignment;
         transform.parent = null;            // Unparent the bullet so it does not follow the Tank that fired it.
         Destroy(gameObject, munitionRange);      // Destroy me after a specified time.
     }
@@ -38,18 +36,13 @@ public class Munition : MonoBehaviour
     private void OnTriggerEnter(Collider collisonObject)
     {
         try
-        {
+        {         
             ActorController actorHit = collisonObject.GetComponent<ActorController>();
-            foreach (var enemyFaction in EnemyFactions)
+            if (factionAlignment.CanHarm(actorHit.factionAlignment))
             {
-                if (enemyFaction.FactionName.Equals(actorHit.faction.FactionName))
-                {
-                    onNPCDeath.Invoke(actorHit);
-                    Destroy(collisonObject.gameObject);
-                    Destroy(gameObject);
-                }
+                Destroy(collisonObject.gameObject);
+                Destroy(gameObject);
             }
-
         }
         catch (System.NullReferenceException)
         {
