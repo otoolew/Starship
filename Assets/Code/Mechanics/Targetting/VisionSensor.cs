@@ -111,7 +111,7 @@ public class VisionSensor : MonoBehaviour
                 if (tag.Equals(hitTag))
                 {
                     currentTarget = scannedTarget.transform;
-                    controller.ShipController.target = currentTarget;
+                    controller.ShipController.targetDestination = currentTarget;
 
                 }
             }
@@ -131,7 +131,7 @@ public class VisionSensor : MonoBehaviour
                 if (tag.Equals(hitTag))
                 {
                     currentTarget = scannedTarget.transform;
-                    controller.ShipController.target = currentTarget;
+                    controller.ShipController.targetDestination = currentTarget;
                     return true;
                 }
             }

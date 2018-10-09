@@ -21,16 +21,19 @@ public class TargetController : MonoBehaviour
         set { targetSensor = value; }
     }
     [SerializeField]
-    private ActorController currentTargetable;
-    public ActorController CurrentTargetable
+    private ActorController currentTarget;
+    public ActorController CurrentTarget
     {
-        get { return currentTargetable; }
-        protected set { currentTargetable = value; }
+        get { return currentTarget; }
+        protected set { currentTarget = value; }
     }
 
     [SerializeField]
     private List<ActorController> trackedTargets = new List<ActorController>();
-
+    #region Actions / Events
+    public Events.AcquiredTarget onAcquiredTarget;
+    public bool HasValidTarget;
+    #endregion
 
     #endregion
     #region Initializations
@@ -50,22 +53,21 @@ public class TargetController : MonoBehaviour
     public void HandleValidTargetFound(ActorController target)
     {
         if (trackedTargets.Contains(target))
-            return;
-
-        
+            return;       
         if (IsTargetableValid(target))
         {
             trackedTargets.Add(target);
             target.onTargetDeath.AddListener(HandleTargetLost);
             Debug.Log(npcController.ActorName + " [TargetSensor] Found a target.");
+            HasValidTarget = HasTarget();
         }          
     }
 
     public void HandleTargetLost(ActorController target)
     {
-        trackedTargets.Remove(target);
-        
+        trackedTargets.Remove(target);        
         Debug.Log(npcController.ActorName + " [TargetSensor] Lost a target.");
+        HasValidTarget = HasTarget();
     }
 
     #endregion
@@ -101,12 +103,24 @@ public class TargetController : MonoBehaviour
         Debug.Log("[TargetController] target is not hostile.");
         return npcController.factionAlignment.CanHarm(target.factionAlignment);
     }
+    public bool HasTarget()
+    {
+        if (trackedTargets.Count < 1)
+            return false;
+
+
+        CurrentTarget = trackedTargets[0];
+        if (CurrentTarget != null)
+        {
+            onAcquiredTarget.Invoke(CurrentTarget);
+            return true;
+        }
+            
+        return false;
+    }
+
     #endregion
 
-    public void LostTarget(ActorController target)
-    {
-
-    }
     private void Update()
     {
 

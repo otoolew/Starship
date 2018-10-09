@@ -9,9 +9,11 @@ using UnityEngine.Events;
 
 public class Events
 {
-    [System.Serializable] public class EventFadeComplete : UnityEvent<bool> { }
-    [System.Serializable] public class EventSceneChangeComplete : UnityEvent<bool> { }
-    [System.Serializable] public class EventPlayerDeath : UnityEvent<bool> { }
-    [System.Serializable] public class EventTargetDeath : UnityEvent<ActorController> { }
-    [System.Serializable] public class EventValidTargetScan : UnityEvent<ActorController> { }
+    [Serializable] public class FadeComplete : UnityEvent<bool> { }
+    [Serializable] public class SceneChangeComplete : UnityEvent<bool> { }
+    [Serializable] public class PlayerDeath : UnityEvent<bool> { }
+    [Serializable] public class TargetDeath : UnityEvent<ActorController> { }
+    [Serializable] public class ValidTargetScan : UnityEvent<ActorController> { }
+    [Serializable] public class AcquiredTarget : UnityEvent<ActorController> { }
+
 }

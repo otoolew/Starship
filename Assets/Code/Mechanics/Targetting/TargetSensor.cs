@@ -30,7 +30,7 @@ public class TargetSensor : MonoBehaviour
 
     #endregion
     #region Events
-    public Events.EventValidTargetScan onValidTargetFound;
+    public Events.ValidTargetScan onValidTargetFound;
 
     #endregion
     #region Initializations

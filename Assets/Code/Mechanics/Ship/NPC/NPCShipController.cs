@@ -32,7 +32,8 @@ public class NPCShipController : MonoBehaviour
         set { thrustPower = value; }
     }
 
-    public Transform target;
+    public Transform targetDestination;
+
     public float EngagementRange;
     // Use this for initialization
     [SerializeField]
@@ -48,9 +49,21 @@ public class NPCShipController : MonoBehaviour
     }
 
 
+    #region Actions / Events
+
+    #endregion
+    #region Event Handlers
+    public void HandleAcquiredTarget(ActorController target)
+    {
+        Debug.Log(GetComponent<NPCController>().ActorName + " [NPCShipController] acquired " + target);
+        if (target != null)
+            targetDestination = target.transform;
+    }
+    #endregion
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        GetComponent<TargetController>().onAcquiredTarget.AddListener(HandleAcquiredTarget);
         //target = FindObjectOfType<ShipMovement>().transform;
     }
     private void Update()
@@ -61,9 +74,9 @@ public class NPCShipController : MonoBehaviour
     private void FixedUpdate()
     {
         CurrentVelocity = rigidBody.velocity.magnitude;
-        if (target != null)
+        if (targetDestination != null)
         {
-            if (((Vector2.Distance(target.position, transform.position)) > EngagementRange) && (timer > pace))
+            if (((Vector2.Distance(targetDestination.position, transform.position)) > EngagementRange) && (timer > pace))
             {
                 Accelerate();
                 timer = 0;
@@ -76,7 +89,7 @@ public class NPCShipController : MonoBehaviour
 
     private void Accelerate()
     {
-        rigidBody.AddForce((target.position - transform.position) * ThrustPower);
+        rigidBody.AddForce((targetDestination.position - transform.position) * ThrustPower);
         // Limit Speed
         if (rigidBody.velocity.magnitude > MaxVelocity)
         {
@@ -86,9 +99,10 @@ public class NPCShipController : MonoBehaviour
 
     private void Turn()
     {
-        Vector3 rotVector = target.transform.position - transform.position;
+        Vector3 rotVector = targetDestination.transform.position - transform.position;
         rotVector.y = 0f;
         Quaternion newRotation = Quaternion.LookRotation(rotVector);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, Time.deltaTime * RotationRate);
     }
+
 }

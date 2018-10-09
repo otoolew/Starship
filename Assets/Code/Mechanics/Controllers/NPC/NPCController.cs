@@ -10,7 +10,8 @@ using UnityEngine;
 public class NPCController : ActorController
 {
     #region Variable Declarations
-    
+    public Enums.NPCState npcState;
+
     [SerializeField]
     private NPCShipController shipController;
     public NPCShipController ShipController
@@ -35,29 +36,41 @@ public class NPCController : ActorController
     }
     public float Velocity
     {
-        get
-        {
-            return GetComponent<Rigidbody>().velocity.magnitude;
-        }
+        get { return GetComponent<Rigidbody>().velocity.magnitude; }
+    }
+    [SerializeField]
+    private Transform targetDestination;
+    public Transform TargetDestination
+    {
+        get { return targetDestination; }
+        private set { targetDestination = value; }
     }
     #endregion
     #region Events
-
+   
     #endregion
 
     #region EventHandlers
-
+    public void HandleAcquiredTarget(ActorController target)
+    {
+        Debug.Log(ActorName + " [NPCController] acquired " + target);
+        if(target != null)
+            targetDestination = target.transform;
+    }
     #endregion
 
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start ()
+    {
+        targetController.onAcquiredTarget.AddListener(HandleAcquiredTarget);
+
+    }
     #region Methods
-    //void Death()
-    //{
-    //    onNPCDeath.Invoke(this);
-    //}
+
+    void UpdateDestination(Transform newDestination)
+    {
+        targetDestination = newDestination;
+    }
     private void OnDisable()
     {
         onTargetDeath.Invoke(this);
@@ -68,7 +81,8 @@ public class NPCController : ActorController
     }
     #endregion
     // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
 		
 	}
 
