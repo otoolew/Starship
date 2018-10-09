@@ -75,39 +75,27 @@ public class TargetController : MonoBehaviour
     #region Methods
 
     /// <summary>
-    /// Clears the list of current targets and clears all events
-    /// </summary>
-    public void ResetTargetter()
-    {
-        //targetsInRange.Clear();
-        //CurrentTargetable = null;
-
-        //targetEntersRange = null;
-        //targetExitsRange = null;
-        //acquiredTarget = null;
-        //lostTarget = null;
-    }
-
-    /// <summary>
     /// Checks if the targetable is a valid target
     /// </summary>
     /// <param name="targetable"></param>
     /// <returns>true if targetable is vaild, false if not</returns>
     private bool IsTargetableValid(ActorController target)
     {
-        Debug.Log("[TargetController] Checking Target...");
+        Debug.Log(npcController.ActorName + "[TargetController] Checking Target...");
         if (target == null)
         {
             return false;
         }
-        Debug.Log("[TargetController] target is not hostile.");
+        Debug.Log(npcController.ActorName + "[TargetController] target is not hostile.");
         return npcController.factionAlignment.CanHarm(target.factionAlignment);
     }
+
     public bool HasTarget()
     {
         if (trackedTargets.Count < 1)
             return false;
 
+        SortTargetListByDistance();
 
         CurrentTarget = trackedTargets[0];
         if (CurrentTarget != null)
@@ -118,6 +106,16 @@ public class TargetController : MonoBehaviour
             
         return false;
     }
+    public void SortTargetListByDistance()
+    {
+        trackedTargets.Sort(delegate (ActorController a, ActorController b)
+        {
+            return Vector2.Distance(transform.position, a.transform.position)
+            .CompareTo(
+              Vector2.Distance(transform.position, b.transform.position));
+        });
+    }
+
 
     #endregion
 

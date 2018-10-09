@@ -15,5 +15,6 @@ public class Events
     [Serializable] public class TargetDeath : UnityEvent<ActorController> { }
     [Serializable] public class ValidTargetScan : UnityEvent<ActorController> { }
     [Serializable] public class AcquiredTarget : UnityEvent<ActorController> { }
+    [Serializable] public class TargetInSight : UnityEvent<ActorController> { }
 
 }

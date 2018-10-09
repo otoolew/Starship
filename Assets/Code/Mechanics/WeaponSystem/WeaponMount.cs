@@ -6,9 +6,12 @@ public class WeaponMount : MonoBehaviour
 {
     public FactionAlignment factionAlignment;
 
+
     // Use this for initialization
     void Start () {
         factionAlignment = GetComponentInParent<ActorController>().factionAlignment;
     }
+
+
 	
 }

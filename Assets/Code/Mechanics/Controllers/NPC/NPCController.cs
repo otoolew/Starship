@@ -51,18 +51,18 @@ public class NPCController : ActorController
     #endregion
 
     #region EventHandlers
-    public void HandleAcquiredTarget(ActorController target)
-    {
-        Debug.Log(ActorName + " [NPCController] acquired " + target);
-        if(target != null)
-            targetDestination = target.transform;
-    }
+    //public void HandleAcquiredTarget(ActorController target)
+    //{
+    //    Debug.Log(ActorName + " [NPCController] acquired " + target);
+    //    if(target != null)
+    //        targetDestination = target.transform;
+    //}
     #endregion
 
     // Use this for initialization
     void Start ()
     {
-        targetController.onAcquiredTarget.AddListener(HandleAcquiredTarget);
+        //targetController.onAcquiredTarget.AddListener(HandleAcquiredTarget);
 
     }
     #region Methods

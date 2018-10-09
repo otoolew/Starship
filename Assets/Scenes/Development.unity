@@ -689,7 +689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11f5f9201133cb4faeaf7da01cb9c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActorName: Ally
+  ActorName: Yellow
   factionAlignment: {fileID: 11400000, guid: 44420e0564e6a4c4d92f77c460b9ecaf, type: 2}
   onTargetDeath:
     m_PersistentCalls:
@@ -1218,8 +1218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11f5f9201133cb4faeaf7da01cb9c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActorName: Ally
-  factionAlignment: {fileID: 11400000, guid: 44420e0564e6a4c4d92f77c460b9ecaf, type: 2}
+  ActorName: Blue
+  factionAlignment: {fileID: 11400000, guid: 4c0b2cc91b9a13b4695c46e79db4af7a, type: 2}
   onTargetDeath:
     m_PersistentCalls:
       m_Calls: []

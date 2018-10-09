@@ -37,6 +37,7 @@ public class NPCWeaponController : MonoBehaviour
     private void Update()
     {
         CooldownWeapons();
+        
     }
     /// <summary>
     /// Load Weapons into a collection.
