@@ -66,6 +66,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1409741678127798
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4966496668168806}
+  - component: {fileID: 65443659241830200}
+  - component: {fileID: 114282017893261028}
+  m_Layer: 0
+  m_Name: BoxTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1521596619889310
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4141726977353162}
-  - component: {fileID: 114321132003360300}
+  - component: {fileID: 114770740765804792}
   m_Layer: 0
   m_Name: WeaponMount
   m_TagString: Untagged
@@ -107,7 +124,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.241}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4966496668168806}
   m_Father: {fileID: 4956959916098762}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -167,6 +185,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4966496668168806
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1409741678127798}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4141726977353162}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &54028976947782146
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -182,6 +213,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
+--- !u!65 &65443659241830200
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1409741678127798}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.1, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95786026106271684
 Animator:
   serializedVersion: 3
@@ -212,9 +255,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcController: {fileID: 114383174296289668}
-  targetSensor: {fileID: 0}
-  currentTargetable: {fileID: 0}
+  targetSensor: {fileID: 114887239637903584}
+  currentTarget: {fileID: 0}
   trackedTargets: []
+  onAcquiredTarget:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Events+AcquiredTarget, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  HasValidTarget: 0
 --- !u!114 &114273752815500386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -226,27 +275,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf32ed9be507dd4a990a98c57a63387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSystems:
-  - {fileID: 11400000, guid: 28548b222055a6a4ab1e8e75cd881a6b, type: 2}
-  - {fileID: 11400000, guid: 24d062e46f540594891b770fe7c16502, type: 2}
-  WeaponList: []
-  weaponIndex: 0
-  weaponMount: {fileID: 0}
-  weaponInRange: 0
---- !u!114 &114321132003360300
+--- !u!114 &114282017893261028
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1521596619889310}
+  m_GameObject: {fileID: 1409741678127798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63c419b6bc3e3c24ea85ea2f4749f24d, type: 3}
+  m_Script: {fileID: 11500000, guid: a0c400277e01bda4f9bde0f67e342235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Owner: 
-  TeamName: 
-  controller: {fileID: 114383174296289668}
+  parentWeapon: {fileID: 0}
+  onTargetEnter:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114383174296289668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -259,15 +304,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActorName: XD-1
-  faction: {fileID: 11400000, guid: c98d17b1fc9e79e4e9d81314aff5e962, type: 2}
-  shipController: {fileID: 114575960498772782}
-  weaponController: {fileID: 114273752815500386}
-  targetController: {fileID: 0}
-  onNPCDeath:
+  factionAlignment: {fileID: 11400000, guid: c98d17b1fc9e79e4e9d81314aff5e962, type: 2}
+  onTargetDeath:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: Events+EventNPCDeath, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: Events+TargetDeath, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  npcState: 0
+  shipController: {fileID: 114575960498772782}
+  weaponController: {fileID: 114273752815500386}
+  targetController: {fileID: 114091319997067268}
+  navDestination: {fileID: 0}
 --- !u!114 &114575960498772782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -282,11 +329,34 @@ MonoBehaviour:
   rotationRate: 90
   maxVelocity: 2
   thrustPower: 2
-  target: {fileID: 0}
+  targetDestination: {fileID: 0}
   EngagementRange: 2
   timer: 0
   pace: 0.25
   currentVelocity: 0
+--- !u!114 &114770740765804792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1521596619889310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63c419b6bc3e3c24ea85ea2f4749f24d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponConfig: {fileID: 11400000, guid: 2a1f0686526dcf5419d8db9bf8411be4, type: 2}
+  Weapon:
+    weaponPrefab: {fileID: 0}
+    munitionPrefab: {fileID: 0}
+    weaponName: 
+    weaponRange: 0
+    weaponPower: 0
+    weaponCooldown: 0
+    weaponTimer: 0
+    triggerTime: 0
+    weaponReady: 0
+  factionAlignment: {fileID: 0}
 --- !u!114 &114887239637903584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -299,13 +369,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetController: {fileID: 114091319997067268}
-  sensorRange: 2
+  sensorRange: 5
   factionAlignment: {fileID: 0}
-  enemyFactions: []
   onValidTargetFound:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: Events+EventValidTargetScan, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: Events+ValidTargetScan, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!135 &135688640310088880
 SphereCollider:
@@ -317,7 +386,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135893692926509806
 SphereCollider:

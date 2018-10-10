@@ -40,7 +40,7 @@ public class Munition : MonoBehaviour
             ActorController actorHit = collisonObject.GetComponent<ActorController>();
             if (factionAlignment.CanHarm(actorHit.factionAlignment))
             {
-                Destroy(collisonObject.gameObject);
+                collisonObject.gameObject.SetActive(false);
                 Destroy(gameObject);
             }
         }

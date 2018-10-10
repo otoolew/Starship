@@ -39,24 +39,20 @@ public class NPCController : ActorController
         get { return GetComponent<Rigidbody>().velocity.magnitude; }
     }
     [SerializeField]
-    private Transform targetDestination;
-    public Transform TargetDestination
+    private Transform navDestination;
+    public Transform NavDestination
     {
-        get { return targetDestination; }
-        private set { targetDestination = value; }
+        get { return navDestination; }
+        private set { navDestination = value; }
     }
+
     #endregion
     #region Events
    
     #endregion
 
     #region EventHandlers
-    //public void HandleAcquiredTarget(ActorController target)
-    //{
-    //    Debug.Log(ActorName + " [NPCController] acquired " + target);
-    //    if(target != null)
-    //        targetDestination = target.transform;
-    //}
+
     #endregion
 
     // Use this for initialization
@@ -69,7 +65,7 @@ public class NPCController : ActorController
 
     void UpdateDestination(Transform newDestination)
     {
-        targetDestination = newDestination;
+        navDestination = newDestination;
     }
     private void OnDisable()
     {

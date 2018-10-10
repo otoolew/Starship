@@ -11,7 +11,7 @@ public class TargetController : MonoBehaviour
     public NPCController NPCController
     {
         get { return npcController; }
-        protected set { npcController = value; }
+        private set { npcController = value; }
     }
     [SerializeField]
     private TargetSensor targetSensor;
@@ -41,6 +41,7 @@ public class TargetController : MonoBehaviour
     {
         npcController = GetComponent<NPCController>();
         targetSensor = GetComponentInChildren<TargetSensor>();
+        targetSensor.FactionAlignment = npcController.factionAlignment;
 
         targetSensor.onValidTargetFound.AddListener(HandleValidTargetFound);
         //npcController.onTargetDeath.AddListener(HandleTargetLost);

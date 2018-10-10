@@ -48,6 +48,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1302232502484060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4705752339428262}
+  - component: {fileID: 114772178925685464}
+  m_Layer: 0
+  m_Name: WeaponMount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1406016727941418
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4621697670914182}
-  - component: {fileID: 114733960323562544}
+  - component: {fileID: 114309572071391670}
   m_Layer: 0
   m_Name: WeaponMount
   m_TagString: Untagged
@@ -105,6 +121,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4396294183371946}
+  - {fileID: 4705752339428262}
   - {fileID: 4621697670914182}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -128,6 +145,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1406016727941418}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4426779474422262}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4705752339428262
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1302232502484060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -180,11 +210,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActorName: Player
-  TeamTag: Blue
-  EnemyTags:
-  - Red
+  factionAlignment: {fileID: 11400000, guid: 4c0b2cc91b9a13b4695c46e79db4af7a, type: 2}
+  onTargetDeath:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Events+TargetDeath, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   shipController: {fileID: 114489260902046574}
   weaponController: {fileID: 114316710745869166}
+--- !u!114 &114309572071391670
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1406016727941418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63c419b6bc3e3c24ea85ea2f4749f24d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponConfig: {fileID: 11400000, guid: d79188cca3f83b74985f0e9142cb6708, type: 2}
+  Weapon:
+    weaponPrefab: {fileID: 0}
+    munitionPrefab: {fileID: 0}
+    weaponName: 
+    weaponRange: 0
+    weaponPower: 0
+    weaponCooldown: 0
+    weaponTimer: 0
+    triggerTime: 0
+    weaponReady: 0
+  factionAlignment: {fileID: 0}
 --- !u!114 &114316710745869166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -196,13 +252,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e6bf1d5015daf468cc705532c29d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireWeaponKey: 32
-  weaponSystems:
-  - {fileID: 11400000, guid: 28548b222055a6a4ab1e8e75cd881a6b, type: 2}
-  - {fileID: 11400000, guid: 24d062e46f540594891b770fe7c16502, type: 2}
-  WeaponList: []
-  weaponIndex: 0
-  weaponMount: {fileID: 4621697670914182}
+  firePrimaryKey: 32
+  fireSecondaryKey: 118
+  MountedWeaponList:
+  - {fileID: 114772178925685464}
+  - {fileID: 114309572071391670}
 --- !u!114 &114489260902046574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -221,20 +275,29 @@ MonoBehaviour:
   rotationInput: 0
   axisInput: {x: 0, y: 0}
   eulerAngleVelocity: {x: 0, y: 0, z: 0}
---- !u!114 &114733960323562544
+--- !u!114 &114772178925685464
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1406016727941418}
+  m_GameObject: {fileID: 1302232502484060}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63c419b6bc3e3c24ea85ea2f4749f24d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Owner: 
-  TeamName: 
-  controller: {fileID: 114161965296015094}
+  weaponConfig: {fileID: 11400000, guid: 2a1f0686526dcf5419d8db9bf8411be4, type: 2}
+  Weapon:
+    weaponPrefab: {fileID: 0}
+    munitionPrefab: {fileID: 0}
+    weaponName: 
+    weaponRange: 0
+    weaponPower: 0
+    weaponCooldown: 0
+    weaponTimer: 0
+    triggerTime: 0
+    weaponReady: 0
+  factionAlignment: {fileID: 0}
 --- !u!136 &136398718330993616
 CapsuleCollider:
   m_ObjectHideFlags: 1

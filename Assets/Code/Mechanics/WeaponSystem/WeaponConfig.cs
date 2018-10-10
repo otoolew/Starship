@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Weapon")]
-public class WeaponSystem : ScriptableObject
+[CreateAssetMenu(menuName = "Weapon Configuration")]
+public class WeaponConfig : ScriptableObject
 {
     public GameObject weaponPrefab;
     public GameObject munitionPrefab;
@@ -10,4 +10,5 @@ public class WeaponSystem : ScriptableObject
     public float weaponRange;
     public float weaponPower;
     public float weaponCooldown;
+
 }

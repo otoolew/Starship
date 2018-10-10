@@ -8,97 +8,33 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    public KeyCode fireWeaponKey;
+    public KeyCode firePrimaryKey;
+    public KeyCode fireSecondaryKey;
 
-    public WeaponSystem[] weaponSystems;
-    public List<Weapon> WeaponList;
-    public int weaponIndex;
-    public Transform weaponMount;
+    public List<WeaponMount> MountedWeaponList = new List<WeaponMount>();
 
     private void Awake()
     {
-        WeaponList = new List<Weapon>();
-        LoadWeaponSystems();
+        
     }
     // Use this for initialization
     private void Start ()
     {
-        weaponIndex = 0;
-        //LoadWeapon(WeaponList[0]);
+
     }
 	
 	// Update is called once per frame
 	private void Update ()
     {
-        if (Input.GetKey(KeyCode.R))
+
+        if (Input.GetKey(firePrimaryKey))
         {
-            weaponIndex = 0;
+            MountedWeaponList[0].Fire();
             //LoadWeapon(WeaponList[0]);
         }
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKey(fireSecondaryKey))
         {
-            weaponIndex = 1;
-            //LoadWeapon(WeaponList[1]);
-        }
-        if (Input.GetKeyDown(fireWeaponKey))
-        {
-            Fire();
-        }
-        CooldownWeapons();
-    }
-    /// <summary>
-    /// Load Weapons into a collection.
-    /// </summary>
-    public void LoadWeaponSystems()
-    {
-        for (int i = 0; i < weaponSystems.Length; i++)
-        {
-            WeaponList.Add(MountWeapon(weaponSystems[i]));
+            MountedWeaponList[1].Fire();
         }
     }
-    /// <summary>
-    /// Used when LoadWeaponSystems is called.
-    /// </summary>
-    /// <param name="weaponSystem"></param>
-    /// <returns></returns>
-    private Weapon MountWeapon(WeaponSystem weaponSystem)
-    {
-        Weapon weapon = new Weapon
-        {
-            WeaponPrefab = weaponSystem.weaponPrefab,
-            WeaponName = weaponSystem.weaponName,
-            MunitionPrefab = weaponSystem.munitionPrefab,
-            WeaponRange = weaponSystem.weaponRange,
-            WeaponPower = weaponSystem.weaponPower,
-            WeaponCooldown = weaponSystem.weaponCooldown,
-            WeaponTimer = weaponSystem.weaponCooldown
-        };
-        return weapon;
-    }
-
-    private void CooldownWeapons()
-    {
-        foreach (var item in WeaponList)
-        {
-            item.WeaponTimer -= Time.deltaTime;
-            if (item.WeaponTimer <= 0)
-            {
-                item.WeaponTimer = 0;
-                item.WeaponReady = true;
-            }
-            else
-            {
-                item.WeaponReady = false;
-            }
-        }
-    }
-    private void Fire()
-    {
-        if (WeaponList[weaponIndex].WeaponReady)
-        {
-            WeaponList[weaponIndex].WeaponTimer = WeaponList[weaponIndex].WeaponCooldown;
-            Instantiate(WeaponList[weaponIndex].MunitionPrefab, weaponMount);
-        }
-    }
-
 }

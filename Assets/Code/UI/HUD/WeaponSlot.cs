@@ -19,12 +19,12 @@ public class WeaponSlot : MonoBehaviour
     void Start ()
     {
         weaponController = FindObjectOfType<WeaponController>();
-        weaponName.text = weaponController.WeaponList[slot].WeaponName;
+        weaponName.text = weaponController.MountedWeaponList[slot].Weapon.WeaponName;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        weaponCooldown.text = ""+weaponController.WeaponList[slot].WeaponTimer;
+        weaponCooldown.text = "" + weaponController.MountedWeaponList[slot].Weapon.WeaponTimer;
     }
 }

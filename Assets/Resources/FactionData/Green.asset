@@ -9,12 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aacd7789ef5b6c0458c2f05389860262, type: 3}
-  m_Name: Anarchist
+  m_Name: Green
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 11400000}
   - {fileID: 11400000, guid: 4c0b2cc91b9a13b4695c46e79db4af7a, type: 2}
-  - {fileID: 11400000, guid: 36e3c1e48efd9e546bf1f8e5690e9ba9, type: 2}
-  - {fileID: 11400000, guid: 44420e0564e6a4c4d92f77c460b9ecaf, type: 2}
   - {fileID: 11400000, guid: d466d718c159c424f82315079a7be5a8, type: 2}
-  - {fileID: 11400000, guid: c98d17b1fc9e79e4e9d81314aff5e962, type: 2}

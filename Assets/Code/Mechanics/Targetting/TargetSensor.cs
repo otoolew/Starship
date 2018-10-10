@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class TargetSensor : MonoBehaviour
@@ -13,6 +14,7 @@ public class TargetSensor : MonoBehaviour
         get { return targetController; }
         protected set { targetController = value; }
     }
+    [Header("Match to Sphere Collider Radius")]
     [SerializeField]
     private float sensorRange;
     public float SensorRange
@@ -25,7 +27,7 @@ public class TargetSensor : MonoBehaviour
     public FactionAlignment FactionAlignment
     {
         get { return factionAlignment; }
-        protected set { factionAlignment = value; }
+        set { factionAlignment = value; }
     }
 
     #endregion
@@ -37,7 +39,6 @@ public class TargetSensor : MonoBehaviour
     private void Start()
     {
         targetController = GetComponentInParent<TargetController>();
-
     }
     #endregion
     #region Methods
@@ -60,4 +61,9 @@ public class TargetSensor : MonoBehaviour
     }
 
     #endregion
+
+#if UNITY_EDITOR
+
+#endif
+
 }
