@@ -13,14 +13,15 @@ public class PauseMenu : MonoBehaviour
 
     private void Awake()
     {
-        ResumeButton.onClick.AddListener(HandleResumeClick);
+        ResumeButton.onClick.AddListener(HandleButtonClick);
         QuitButton.onClick.AddListener(HandleQuitClick);
     }
 
-    void HandleResumeClick()
+    void HandleButtonClick()
     {
         GameManager.Instance.TogglePause();
     }
+
 
     void HandleQuitClick()
     {

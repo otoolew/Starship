@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Enums
 {
-    [System.Serializable] public enum NPCState {IDLE, PATROL, ENGAGING }
-    [System.Serializable] public enum WayPointType { LINKED, RANDOM, LOOP }
-    [System.Serializable] public enum PointOfInterestType { TIMED, OBJECTIVE, LINGER }
-
+    [Serializable] public enum NPCState {IDLE, PATROL, ENGAGING }
+    [Serializable] public enum WayPointType { LINKED, RANDOM, LOOP }
+    [Serializable] public enum PointOfInterestType { TIMED, OBJECTIVE, LINGER }
+    [Serializable] public enum ItemType { NONE, COLLECTABLE, EQUIPPABLE, MISC};
+    [Serializable] public enum EquipableItemType { WEAPON, ARMOR, UTILITY, ENGINE };
 }
