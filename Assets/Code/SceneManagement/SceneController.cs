@@ -1,7 +1,7 @@
 ﻿// ----------------------------------------------------------------------------
-//  University of Pittsburgh  
-//  GamesEdu Workshop #2
-//  19 SEPT 2018
+//  William O'Toole 
+//  Project: Starship
+//  SEPT 2018
 // ----------------------------------------------------------------------------
 using System.Collections;
 using System.Collections.Generic;
@@ -42,11 +42,11 @@ public class SceneController : MonoBehaviour
     /// <summary>
     /// Event that will notify all subscribers that the SceneChange sequence has started
     /// </summary>
-    public Events.EventFadeComplete onSceneChangeStart;
+    public Events.FadeComplete onSceneChangeStart;
     /// <summary>
     /// Event that will notify all subscribers that the SceneChange sequence has completed
     /// </summary>
-    public Events.EventFadeComplete onSceneChangeComplete;
+    public Events.FadeComplete onSceneChangeComplete;
     /// <summary>
     /// Starts the Fade and Switch Coroutine
     /// </summary>

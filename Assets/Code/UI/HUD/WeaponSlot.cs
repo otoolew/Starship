@@ -1,5 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// ----------------------------------------------------------------------------
+//  William O'Toole 
+//  Project: Starship
+//  OCT 2018
+// ----------------------------------------------------------------------------
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,12 +19,12 @@ public class WeaponSlot : MonoBehaviour
     void Start ()
     {
         weaponController = FindObjectOfType<WeaponController>();
-        weaponName.text = weaponController.WeaponList[slot].WeaponName;
+        weaponName.text = weaponController.WeaponComponentList[slot].WeaponSchematic.partName;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        weaponCooldown.text = ""+weaponController.WeaponList[slot].WeaponTimer;
+        weaponCooldown.text = "" + weaponController.WeaponComponentList[slot].WeaponTimer;
     }
 }

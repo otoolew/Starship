@@ -1,7 +1,7 @@
 ﻿// ----------------------------------------------------------------------------
-// Author:  William O'Toole
-// Project: BitRivet Framework
-// Date:    13 JUNE 2018
+//  William O'Toole 
+//  Project: Starship
+//  SEPT 2018
 // ----------------------------------------------------------------------------
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,14 +13,15 @@ public class PauseMenu : MonoBehaviour
 
     private void Awake()
     {
-        ResumeButton.onClick.AddListener(HandleResumeClick);
+        ResumeButton.onClick.AddListener(HandleButtonClick);
         QuitButton.onClick.AddListener(HandleQuitClick);
     }
 
-    void HandleResumeClick()
+    void HandleButtonClick()
     {
         GameManager.Instance.TogglePause();
     }
+
 
     void HandleQuitClick()
     {

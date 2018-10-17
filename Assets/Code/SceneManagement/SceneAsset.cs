@@ -1,7 +1,7 @@
 ﻿// ----------------------------------------------------------------------------
-//  University of Pittsburgh  
-//  GamesEdu Workshop #2
-//  19 SEPT 2018
+//  William O'Toole 
+//  Project: Starship
+//  SEPT 2018
 // ----------------------------------------------------------------------------
 using UnityEngine;
 /// <summary>
