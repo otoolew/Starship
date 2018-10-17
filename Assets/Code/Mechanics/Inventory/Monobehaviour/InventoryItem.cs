@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public abstract class InventoryItem : MonoBehaviour
+public class InventoryItem: MonoBehaviour
 {
     public ItemConfig ItemConfig;
     public string ItemName;
-
+    public int ItemAmount;
 }

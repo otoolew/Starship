@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour 
+public class InventorySlot : MonoBehaviour, IDropHandler
 {
     #region Variable Declarations
     public ItemConfig itemConfig;
@@ -12,26 +13,30 @@ public class InventorySlot : MonoBehaviour
     public Text amountText;
     public int ItemAmount;
     public bool isEmpty;
-    public UnityEvent onValueChange;
     #endregion
-    #region Initializations
-    // Use this for initialization
-    void Start () 
-	{
-        image.sprite = itemConfig.itemIcon;
-    }
-    #endregion	
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
-	public void UpdateUI()
+    private void Start()
     {
-        amountText.text = ItemAmount.ToString();
-    }
-	//Editor Code Here
-	#if UNITY_EDITOR
+        UpdateUI();
 
-    #endif
+    }
+    public void UpdateUI()
+    {
+        image.sprite = itemConfig.itemIcon;
+        if(ItemAmount<1)
+            amountText.text = "";
+        else
+            amountText.text = "" + ItemAmount;
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        RectTransform invSlot = transform as RectTransform;
+        if (RectTransformUtility.RectangleContainsScreenPoint(invSlot, Input.mousePosition))
+        {
+            //ItemConfig tempItem = itemConfig;
+            itemConfig = eventData.pointerDrag.GetComponent<InventorySlot>().itemConfig;
+            UpdateUI();
+            Debug.Log("Swaped Item");
+        }
+    }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CollectableItem : InventoryItem 
 {
     #region Variable Declarations
-    public int ItemAmount;
+
 	#endregion
 	#region Initializations
 	// Use this for initialization

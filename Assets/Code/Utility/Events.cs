@@ -16,5 +16,6 @@ public class Events
     [Serializable] public class ValidTargetScan : UnityEvent<ActorController> { }
     [Serializable] public class AcquiredTarget : UnityEvent<ActorController> { }
     [Serializable] public class TargetInSight : UnityEvent<ActorController> { }
+    [Serializable] public class InventorySlotSwap : UnityEvent<InventorySlot, InventorySlot> { }
 
 }

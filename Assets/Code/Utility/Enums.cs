@@ -9,5 +9,5 @@ public class Enums
     [Serializable] public enum WayPointType { LINKED, RANDOM, LOOP }
     [Serializable] public enum PointOfInterestType { TIMED, OBJECTIVE, LINGER }
     [Serializable] public enum ItemType { NONE, COLLECTABLE, EQUIPPABLE, MISC};
-    [Serializable] public enum EquipableItemType { WEAPON, ARMOR, UTILITY, ENGINE };
+    [Serializable] public enum PartComponentType { WEAPON, HULL, ENGINE, UTILITY };
 }

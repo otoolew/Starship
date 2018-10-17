@@ -43,3 +43,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: InventoryPanel
+    uniqueID: 638543703
+    locked: 0

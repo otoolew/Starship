@@ -5,7 +5,7 @@ using UnityEngine;
 public class EquipmentItem : InventoryItem 
 {
     #region Variable Declarations
-    public Enums.EquipableItemType equipmentType;
+    public Enums.PartComponentType equipmentType;
     #endregion
     #region Initializations
     // Use this for initialization
