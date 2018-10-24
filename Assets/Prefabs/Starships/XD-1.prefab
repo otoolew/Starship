@@ -36,7 +36,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4694984626025310}
-  - component: {fileID: 114024918588458402}
+  - component: {fileID: 114481560598991890}
+  - component: {fileID: 114075113972514734}
   m_Layer: 0
   m_Name: WeaponMount
   m_TagString: Untagged
@@ -56,23 +57,6 @@ GameObject:
   - component: {fileID: 114013084930435848}
   m_Layer: 0
   m_Name: TargetSensor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1640140265072372
-GameObject:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4387687564790752}
-  - component: {fileID: 65225011219647460}
-  - component: {fileID: 114851120874327304}
-  m_Layer: 0
-  m_Name: BoxTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,7 +120,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1877488618372016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.35, y: 0, z: 1.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4113191126638420}
@@ -158,19 +142,6 @@ Transform:
   m_Father: {fileID: 4163776590130022}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4387687564790752
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1640140265072372}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4694984626025310}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4694984626025310
 Transform:
   m_ObjectHideFlags: 1
@@ -180,8 +151,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.241}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4387687564790752}
+  m_Children: []
   m_Father: {fileID: 4163776590130022}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -213,18 +183,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
---- !u!65 &65225011219647460
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1640140265072372}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.1, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95460712846702394
 Animator:
   serializedVersion: 3
@@ -262,7 +220,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: Events+ValidTargetScan, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &114024918588458402
+--- !u!114 &114075113972514734
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -270,21 +228,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1336778932746480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63c419b6bc3e3c24ea85ea2f4749f24d, type: 3}
+  m_Script: {fileID: 11500000, guid: a0c400277e01bda4f9bde0f67e342235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponConfig: {fileID: 11400000, guid: 2a1f0686526dcf5419d8db9bf8411be4, type: 2}
-  Weapon:
-    weaponPrefab: {fileID: 0}
-    munitionPrefab: {fileID: 0}
-    weaponName: 
-    weaponRange: 0
-    weaponPower: 0
-    weaponCooldown: 0
-    weaponTimer: 0
-    triggerTime: 0
-    weaponReady: 0
-  factionAlignment: {fileID: 0}
+  parentWeapon: {fileID: 0}
+  targetController: {fileID: 0}
 --- !u!114 &114176562976368036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -340,23 +288,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf32ed9be507dd4a990a98c57a63387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114851120874327304
+--- !u!114 &114481560598991890
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1640140265072372}
+  m_GameObject: {fileID: 1336778932746480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0c400277e01bda4f9bde0f67e342235, type: 3}
+  m_Script: {fileID: 11500000, guid: ec6e0deca3876a64db5e8c112ac433c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentWeapon: {fileID: 0}
-  onTargetEnter:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  weaponSchematic: {fileID: 11400000, guid: 944b4d9fe4e12234184c300cbad04fff, type: 2}
+  factionAlignment: {fileID: 0}
+  weaponRange: 0
+  weaponPower: 0
+  weaponCooldown: 0
+  weaponTimer: 0
+  triggerTime: 0
+  weaponReady: 0
+  durability: 0
+  componentDrag: 0
+  operational: 0
 --- !u!114 &114978472937049016
 MonoBehaviour:
   m_ObjectHideFlags: 1

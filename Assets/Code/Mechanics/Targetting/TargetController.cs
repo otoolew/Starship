@@ -60,6 +60,7 @@ public class TargetController : MonoBehaviour
             trackedTargets.Add(target);
             target.onTargetDeath.AddListener(HandleTargetLost);
             Debug.Log(npcController.ActorName + " [TargetSensor] Found a target.");
+
             HasValidTarget = HasTarget();
         }          
     }
@@ -95,7 +96,6 @@ public class TargetController : MonoBehaviour
     {
         if (trackedTargets.Count < 1)
             return false;
-
         SortTargetListByDistance();
 
         CurrentTarget = trackedTargets[0];
@@ -112,11 +112,13 @@ public class TargetController : MonoBehaviour
         trackedTargets.Sort(delegate (ActorController a, ActorController b)
         {
             return Vector2.Distance(transform.position, a.transform.position)
-            .CompareTo(
-              Vector2.Distance(transform.position, b.transform.position));
+            .CompareTo(Vector2.Distance(transform.position, b.transform.position));
         });
     }
-
+    public float DistanceToTarget()
+    {
+        return Vector3.Distance(gameObject.transform.position, CurrentTarget.transform.position);
+    }
 
     #endregion
 
