@@ -7,37 +7,32 @@ public class WeaponTrigger : MonoBehaviour
 {
     #region Variable Declarations
     public WeaponComponent parentWeapon;
+    public TargetController targetController;
     #endregion
     #region Events
-    public UnityEvent onTargetEnter;
+
     #endregion
     #region Initializations
     // Use this for initialization
     void Start () 
 	{
         parentWeapon = GetComponentInParent<WeaponComponent>();
+        targetController = parentWeapon.GetComponentInParent<TargetController>();
     }
     #endregion	
 	// Update is called once per frame
 	void Update () 
 	{
-		
-	}
-    private void OnTriggerStay(Collider other)
-    {
-        try
+        if (targetController.CurrentTarget != null)
         {
-            if (parentWeapon.FactionAlignment.CanHarm(other.GetComponent<ActorController>().factionAlignment))
+            if(targetController.DistanceToTarget() < parentWeapon.WeaponRange)
             {
                 parentWeapon.Fire();
             }
+     
         }
-        catch (System.NullReferenceException)
-        {
-            Debug.Log("[WeaponTrigger] Catch");
-        }
+	}
 
-    }
     //Editor Code Here
 #if UNITY_EDITOR
 

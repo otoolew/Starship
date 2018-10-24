@@ -88,7 +88,7 @@ public class WeaponComponent : MonoBehaviour
     #region Init
     public void InitComponent()
     {
-        GetComponentInChildren<SpriteRenderer>().sprite = weaponSchematic.partSprite;
+        //GetComponentInChildren<SpriteRenderer>().sprite = weaponSchematic.partSprite;
         WeaponRange = weaponSchematic.weaponRange;
         WeaponPower = weaponSchematic.weaponPower;
         WeaponCooldown = weaponSchematic.weaponCooldown;

@@ -56,7 +56,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4705752339428262}
-  - component: {fileID: 114772178925685464}
+  - component: {fileID: 114344632449160854}
   m_Layer: 0
   m_Name: WeaponMount
   m_TagString: Untagged
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4621697670914182}
-  - component: {fileID: 114309572071391670}
+  - component: {fileID: 114056674598803660}
   m_Layer: 0
   m_Name: WeaponMount
   m_TagString: Untagged
@@ -198,6 +198,28 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114056674598803660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1406016727941418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6e0deca3876a64db5e8c112ac433c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSchematic: {fileID: 11400000, guid: 944b4d9fe4e12234184c300cbad04fff, type: 2}
+  factionAlignment: {fileID: 0}
+  weaponRange: 0
+  weaponPower: 0
+  weaponCooldown: 0
+  weaponTimer: 0
+  triggerTime: 0
+  weaponReady: 0
+  durability: 0
+  componentDrag: 0
+  operational: 0
 --- !u!114 &114161965296015094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -218,29 +240,6 @@ MonoBehaviour:
       PublicKeyToken=null
   shipController: {fileID: 114489260902046574}
   weaponController: {fileID: 114316710745869166}
---- !u!114 &114309572071391670
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1406016727941418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63c419b6bc3e3c24ea85ea2f4749f24d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponConfig: {fileID: 11400000, guid: d79188cca3f83b74985f0e9142cb6708, type: 2}
-  Weapon:
-    weaponPrefab: {fileID: 0}
-    munitionPrefab: {fileID: 0}
-    weaponName: 
-    weaponRange: 0
-    weaponPower: 0
-    weaponCooldown: 0
-    weaponTimer: 0
-    triggerTime: 0
-    weaponReady: 0
-  factionAlignment: {fileID: 0}
 --- !u!114 &114316710745869166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,9 +253,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePrimaryKey: 32
   fireSecondaryKey: 118
-  MountedWeaponList:
-  - {fileID: 114772178925685464}
-  - {fileID: 114309572071391670}
+  WeaponComponentList:
+  - {fileID: 114344632449160854}
+  - {fileID: 114056674598803660}
+--- !u!114 &114344632449160854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1302232502484060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6e0deca3876a64db5e8c112ac433c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSchematic: {fileID: 11400000, guid: 944b4d9fe4e12234184c300cbad04fff, type: 2}
+  factionAlignment: {fileID: 0}
+  weaponRange: 0
+  weaponPower: 0
+  weaponCooldown: 0
+  weaponTimer: 0
+  triggerTime: 0
+  weaponReady: 0
+  durability: 0
+  componentDrag: 0
+  operational: 0
 --- !u!114 &114489260902046574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -275,29 +296,6 @@ MonoBehaviour:
   rotationInput: 0
   axisInput: {x: 0, y: 0}
   eulerAngleVelocity: {x: 0, y: 0, z: 0}
---- !u!114 &114772178925685464
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1302232502484060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63c419b6bc3e3c24ea85ea2f4749f24d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponConfig: {fileID: 11400000, guid: 2a1f0686526dcf5419d8db9bf8411be4, type: 2}
-  Weapon:
-    weaponPrefab: {fileID: 0}
-    munitionPrefab: {fileID: 0}
-    weaponName: 
-    weaponRange: 0
-    weaponPower: 0
-    weaponCooldown: 0
-    weaponTimer: 0
-    triggerTime: 0
-    weaponReady: 0
-  factionAlignment: {fileID: 0}
 --- !u!136 &136398718330993616
 CapsuleCollider:
   m_ObjectHideFlags: 1
