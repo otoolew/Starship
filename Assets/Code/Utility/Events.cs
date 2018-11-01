@@ -17,5 +17,7 @@ public class Events
     [Serializable] public class AcquiredTarget : UnityEvent<ActorController> { }
     [Serializable] public class TargetInSight : UnityEvent<ActorController> { }
     [Serializable] public class InventorySlotSwap : UnityEvent<InventorySlot, InventorySlot> { }
+    [Serializable] public class EngineDisabled : UnityEvent<EngineComponent> { }
+    [Serializable] public class WeaponDisabled : UnityEvent<WeaponComponent> { }
 
 }

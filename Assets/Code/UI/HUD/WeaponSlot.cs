@@ -14,17 +14,18 @@ public class WeaponSlot : MonoBehaviour
     public int slot;
     public Text weaponName;
     public Text weaponCooldown;
-    public WeaponController weaponController;
+    public PlayerController playerController;
+
     // Use this for initialization
     void Start ()
     {
-        weaponController = FindObjectOfType<WeaponController>();
-        weaponName.text = weaponController.WeaponComponentList[slot].WeaponSchematic.partName;
+        playerController = FindObjectOfType<PlayerController>();
+        weaponName.text = playerController.Starship.weapons[slot].WeaponSchematic.partName;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        weaponCooldown.text = "" + weaponController.WeaponComponentList[slot].WeaponTimer;
+        weaponCooldown.text = "" + playerController.Starship.weapons[slot].WeaponTimer;
     }
 }

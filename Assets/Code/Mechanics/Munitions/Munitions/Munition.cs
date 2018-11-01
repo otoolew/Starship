@@ -15,7 +15,7 @@ public class Munition : MonoBehaviour
     [Header("How fast do I go?")]
     public float munitionSpeed;
     [Header("How much damage do I do?")]
-    public float munitionDamage;
+    public int munitionDamage;
     [Header("Who do I belong to?")]
     public FactionAlignment factionAlignment;
 
@@ -25,6 +25,7 @@ public class Munition : MonoBehaviour
         factionAlignment = GetComponentInParent<WeaponComponent>().FactionAlignment;
         transform.parent = null;            // Unparent the bullet so it does not follow the Tank that fired it.
         Destroy(gameObject, munitionRange);      // Destroy me after a specified time.
+        //gameObject.layer = 
     }
 
     // Update is called once per frame
@@ -37,10 +38,10 @@ public class Munition : MonoBehaviour
     {
         try
         {         
-            ActorController actorHit = collisonObject.GetComponent<ActorController>();
-            if (factionAlignment.CanHarm(actorHit.factionAlignment))
+            StarshipComponent componentHit = collisonObject.GetComponent<StarshipComponent>();
+            if (componentHit.tag == "Hostile")
             {
-                collisonObject.gameObject.SetActive(false);
+                componentHit.ApplyDamage(munitionDamage);
                 Destroy(gameObject);
             }
         }
