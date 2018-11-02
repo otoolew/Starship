@@ -6,7 +6,8 @@
 using UnityEngine;
 public class NPCController : StarshipController
 {
-    #region Variable Declarations
+    #region Properties and Variables
+    [SerializeField]
     private Rigidbody rigidBody;
     public override Rigidbody RigidBody
     {
@@ -43,12 +44,25 @@ public class NPCController : StarshipController
         get { return thrustPower; }
         set { thrustPower = value; }
     }
-
-    public float Velocity
+    [SerializeField]
+    private float maxWeaponRange;
+    public override float MaxWeaponRange
     {
-        get { return GetComponent<Rigidbody>().velocity.magnitude; }
+        get { return maxWeaponRange; }
+        set { maxWeaponRange = value; }
     }
 
+    [SerializeField]
+    private float minWeaponRange;
+    public override float MinWeaponRange
+    {
+        get { return minWeaponRange; }
+        set { minWeaponRange = value; }
+    }
+
+    #endregion
+
+    #region NPC Logic Props and Vars
     [SerializeField]
     private Transform navDestination;
     public Transform NavDestination
@@ -58,73 +72,120 @@ public class NPCController : StarshipController
     }
 
     [SerializeField]
-    private float timer;
-    public float Timer
+    private Transform currentTarget;
+    public Transform CurrentTarget
     {
-        get { return timer; }
-        private set { timer = value; }
+        get { return currentTarget; }
+        private set { currentTarget = value; }
     }
 
-    #endregion
-    #region Events
+    [SerializeField]
+    private float thrustPace;
+    public float ThrustPace
+    {
+        get { return thrustPace; }
+        private set { thrustPace = value; }
+    }
 
+    [SerializeField]
+    private float stopDistance;
+    public float StopDistance
+    {
+        get { return stopDistance; }
+        private set { stopDistance = value; }
+    }
+
+    public Vector3 EulerAngleVelocity { get; set; }
+    float timer;
     #endregion
 
     #region EventHandlers
-    public void HandleAcquiredTarget(ShipController target)
-    {
-        Debug.Log(GetComponent<ShipController>() + " [NPCShipController] acquired " + target);
-        if (target != null)
-            navDestination = target.transform;
-    }
+    public Events.WeaponDisabled partDisabled;
     #endregion
 
-    // Use this for initialization
-    void Start ()
+    #region Monobehaviour
+    /// <summary>
+    /// This function is always called before any Start functions and also just after a prefab is instantiated.
+    /// (If a GameObject is inactive during start up Awake is not called until it is made active.)
+    /// </summary>
+    private void Awake()
     {
+        rigidBody = GetComponent<Rigidbody>();
         starship = GetComponentInChildren<Starship>();
-        //targetController.onAcquiredTarget.AddListener(HandleAcquiredTarget);
     }
-    #region Methods
+    /// <summary>
+    /// (only called if the Object is active): This function is called just after the object is enabled. 
+    /// This happens when a MonoBehaviour instance is created, such as when a level is loaded or a GameObjectwith the script component is instantiated.
+    /// </summary>
+    private void OnEnable()
+    {
 
+    }
+    /// <summary>
+    /// Start is called before the first frame update only if the script instance is enabled.
+    /// </summary>
+    private void Start()
+    {
+        navDestination = gameObject.transform;
+        rotationRate = 180f;
+        maxVelocity = starship.TotalEnginePower;
+        thrustPower = starship.TotalEngineThrust;
+        EulerAngleVelocity = new Vector3(0, RotationRate, 0);
+    }
+    /// <summary>
+    /// Update is called once per frame. It is the main workhorse function for frame updates.
+    /// </summary>
+    private void Update()
+    {
+        timer += Time.deltaTime;
+    }
+    /// <summary>
+    /// All physics calculations and updates occur immediately after FixedUpdate. 
+    /// </summary>
+    void FixedUpdate()
+    {
+        AccelerateStarship();
+        RotateStarship();
+    }
+    private void OnDisable()
+    {
+
+    }
+    private void OnDestroy()
+    {
+
+    }
+    #endregion
+    public override void FireWeapon(WeaponComponent weapon)
+    {
+        weapon.Fire();
+    }
     void UpdateDestination(Transform newDestination)
     {
         navDestination = newDestination;
     }
-    private void OnDisable()
-    {
-        //onTargetDeath.Invoke(this);
-    }
-    private void OnDestroy()
-    {
-        
-    }
-    #endregion
-    // Update is called once per frame
-    private void Update()
-    {
-        timer += Time.deltaTime;
-        //TODO: FireWeapon(WeaponComponent weapon) When In Range
-    }
-    private void FixedUpdate()
-    {
-
-        if (navDestination != null)
-        {
-            // TODO: Fix Hard Code Stop Range 2.0f, Pace 1.0f
-            if (((Vector2.Distance(navDestination.position, transform.position)) > 2.0f) && (timer > 1.0f))
-            {
-                AccelerateStarship();
-                timer = 0;
-            }
-
-            RotateStarship();
-        }
-
-    }
     public override void AccelerateStarship()
     {
-        rigidBody.AddForce((navDestination.position - transform.position) * ThrustPower);
+        if (currentTarget != null)
+        {
+            if (((Vector2.Distance(transform.position, currentTarget.position)) > maxWeaponRange) && (timer > thrustPace))
+            {
+                rigidBody.AddForce((currentTarget.position - transform.position) * ThrustPower);
+                timer = 0;
+            }
+        }
+        else
+        {
+            if((Vector2.Distance(transform.position, navDestination.position)) > stopDistance)
+            {
+                if (timer > thrustPace)
+                {
+                    rigidBody.AddForce((navDestination.position - transform.position) * ThrustPower);
+                    timer = 0;
+                }
+            }
+        }
+
         // Limit Speed
         if (rigidBody.velocity.magnitude > MaxVelocity)
         {
@@ -134,13 +195,23 @@ public class NPCController : StarshipController
 
     public override void RotateStarship()
     {
-        Vector3 rotVector = navDestination.transform.position - transform.position;
-        rotVector.y = 0f;
-        Quaternion newRotation = Quaternion.LookRotation(rotVector);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, Time.deltaTime * RotationRate);
+        Vector3 rotVector = Vector3.zero;
+
+        if (currentTarget != null)
+            rotVector = currentTarget.transform.position - transform.position;
+        else
+            rotVector = navDestination.transform.position - transform.position;
+
+        if(rotVector != Vector3.zero)
+        {
+            rotVector.y = 0f;
+            Quaternion newRotation = Quaternion.LookRotation(rotVector);
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, Time.deltaTime * RotationRate);
+        }
     }
-    public override void FireWeapon(WeaponComponent weapon)
+    void OnDrawGizmosSelected()
     {
-        throw new System.NotImplementedException();
+
     }
 }

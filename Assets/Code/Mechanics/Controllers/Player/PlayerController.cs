@@ -45,6 +45,21 @@ public class PlayerController : StarshipController
         get { return thrustPower; }
         set { thrustPower = value; }
     }
+    [SerializeField]
+    private float maxWeaponRange;
+    public override float MaxWeaponRange
+    {
+        get { return maxWeaponRange; }
+        set { maxWeaponRange = value; }
+    }
+
+    [SerializeField]
+    private float minWeaponRange;
+    public override float MinWeaponRange
+    {
+        get { return minWeaponRange; }
+        set { minWeaponRange = value; }
+    }
     #endregion
     #region PlayerInput Props and Vars
     public float ThrustInput { get; set; }
@@ -60,8 +75,11 @@ public class PlayerController : StarshipController
     public Events.WeaponDisabled partDisabled;
     #endregion
 
+
+    #region Monobehaviour
     /// <summary>
-    /// Init Components
+    /// This function is always called before any Start functions and also just after a prefab is instantiated.
+    /// (If a GameObject is inactive during start up Awake is not called until it is made active.)
     /// </summary>
     private void Awake()
     {
@@ -69,7 +87,15 @@ public class PlayerController : StarshipController
         starship = GetComponentInChildren<Starship>();
     }
     /// <summary>
-    /// Init Properties
+    /// (only called if the Object is active): This function is called just after the object is enabled. 
+    /// This happens when a MonoBehaviour instance is created, such as when a level is loaded or a GameObjectwith the script component is instantiated.
+    /// </summary>
+    private void OnEnable()
+    {
+
+    }
+    /// <summary>
+    /// Start is called before the first frame update only if the script instance is enabled.
     /// </summary>
     private void Start()
     {
@@ -77,8 +103,10 @@ public class PlayerController : StarshipController
         maxVelocity = starship.TotalEnginePower;
         thrustPower = starship.TotalEngineThrust;
         EulerAngleVelocity = new Vector3(0, RotationRate, 0);
-
     }
+    /// <summary>
+    /// Update is called once per frame. It is the main workhorse function for frame updates.
+    /// </summary>
     private void Update()
     {
         RotationInput = Input.GetAxis("Horizontal");
@@ -89,13 +117,23 @@ public class PlayerController : StarshipController
             FireWeapon(starship.weapons[0]); //TODO: Make Dynamic
         }
     }
-    // Update is called once per frame
+    /// <summary>
+    /// All physics calculations and updates occur immediately after FixedUpdate. 
+    /// </summary>
     void FixedUpdate()
     {
         AccelerateStarship();
         RotateStarship();
     }
+    private void OnDisable()
+    {
 
+    }
+    private void OnDestroy()
+    {
+
+    }
+    #endregion
     public override void FireWeapon(WeaponComponent weapon)
     {
         weapon.Fire();

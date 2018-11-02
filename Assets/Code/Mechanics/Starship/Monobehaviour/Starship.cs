@@ -21,13 +21,44 @@ public class Starship : MonoBehaviour
             }
             return totalEnginePower;
         }
-    }
 
+    }
     public float TotalEngineThrust
     {
-        get { return TotalEnginePower *0.5f; }
+        get { return TotalEnginePower * 0.5f; }
     }
 
+    [SerializeField]
+    private float minWeaponRange;
+    public float MinWeaponRange
+    {
+        get
+        {
+            minWeaponRange = starshipSchematic.weaponSchematics[0].weaponRange;
+            for (int i = 0; i < engines.Length; i++)
+            {
+                float tempVal = starshipSchematic.weaponSchematics[i].weaponRange;
+                if (tempVal < minWeaponRange)
+                    maxWeaponRange = tempVal;
+            }
+            return minWeaponRange;
+        }
+    }
+    [SerializeField]
+    private float maxWeaponRange;
+    public float MaxWeaponRange
+    {
+        get
+        {
+            for (int i = 0; i < weapons.Length; i++)
+            {
+                float tempVal = starshipSchematic.weaponSchematics[i].weaponRange;
+                if (tempVal > maxWeaponRange)
+                    maxWeaponRange = tempVal;
+            }
+            return maxWeaponRange;
+        }
+    }
     #region Monobehaviour
     private void Awake()
     {
