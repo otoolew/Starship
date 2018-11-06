@@ -4,28 +4,18 @@ using UnityEngine;
 
 public class Starship : MonoBehaviour
 {
+    public StarshipController controller;
     public StarshipSchematic starshipSchematic;
     public HullComponent hull;
     public EngineComponent[] engines;
     public WeaponComponent[] weapons;
     public SensorComponent sensor;
 
-    [SerializeField]
-    private float totalEnginePower;
-    public float TotalEnginePower
-    {
-        get {
-            for (int i = 0; i < engines.Length; i++)
-            {
-                totalEnginePower += starshipSchematic.engineSchematics[i].enginePower;
-            }
-            return totalEnginePower;
-        }
+    public float TotalEnginePower { get; set; }
 
-    }
     public float TotalEngineThrust
     {
-        get { return TotalEnginePower * 0.5f; }
+        get { return TotalEnginePower * 2f; }
     }
 
     [SerializeField]
@@ -39,30 +29,20 @@ public class Starship : MonoBehaviour
             {
                 float tempVal = starshipSchematic.weaponSchematics[i].weaponRange;
                 if (tempVal < minWeaponRange)
-                    maxWeaponRange = tempVal;
+                    minWeaponRange = tempVal;
             }
             return minWeaponRange;
         }
     }
-    [SerializeField]
-    private float maxWeaponRange;
-    public float MaxWeaponRange
-    {
-        get
-        {
-            for (int i = 0; i < weapons.Length; i++)
-            {
-                float tempVal = starshipSchematic.weaponSchematics[i].weaponRange;
-                if (tempVal > maxWeaponRange)
-                    maxWeaponRange = tempVal;
-            }
-            return maxWeaponRange;
-        }
-    }
+
+    public float MaxWeaponRange { get; set; }
+
     #region Monobehaviour
     private void Awake()
     {
+        controller = GetComponentInParent<StarshipController>();
         BuildShip();
+
     }
     private void Start()
     {
@@ -74,14 +54,21 @@ public class Starship : MonoBehaviour
     {
         // Hull
         hull.HullSchematic = starshipSchematic.hullSchematic;
+        hull.Controller = controller;
+        hull.onHullDisabled.AddListener(HandleHullDisabled); // Subscribe
         // Sensor
         sensor.SensorSchematic = starshipSchematic.sensorSchematic;
+        sensor.Controller = controller;
         // Engines
         if (engines.Length == 0)
             return;
         for (int i = 0; i < engines.Length; i++)
         {
             engines[i].EngineSchematic = starshipSchematic.engineSchematics[i];
+            engines[i].Controller = controller;
+            engines[i].onEngineDisabled.AddListener(HandleEngineDisabled); // Subscribe or Listen for EventSceneChangeStart        
+            TotalEnginePower += starshipSchematic.engineSchematics[i].enginePower;
+            
         }
         // Weapons
         if (weapons.Length == 0)
@@ -89,10 +76,28 @@ public class Starship : MonoBehaviour
         for (int i = 0; i < weapons.Length; i++)
         {
             weapons[i].WeaponSchematic = starshipSchematic.weaponSchematics[i];
-            //weapons[i].FactionAlignment = controller.factionAlignment;
+
+            if (weapons[i].WeaponSchematic.weaponRange > MaxWeaponRange)
+                MaxWeaponRange = weapons[i].WeaponSchematic.weaponRange;
+
+            weapons[i].Controller = controller;
+            weapons[i].onWeaponDisabled.AddListener(HandleWeaponDisabled);
         }
-
     }
-
+    private void HandleHullDisabled(HullComponent disabledHull)
+    {
+        Debug.Log(disabledHull.name + " is disabled");
+    }
+    private void HandleWeaponDisabled(WeaponComponent disabledWeapon)
+    {
+        disabledWeapon.GetComponent<Collider>().enabled = false;
+        Debug.Log(disabledWeapon.name + " is disabled");
+    }
+    private void HandleEngineDisabled(EngineComponent disabledEngine)
+    {
+        disabledEngine.GetComponent<Collider>().enabled = false;
+        TotalEnginePower -= disabledEngine.EnginePower;
+        controller.ThrustPower = TotalEngineThrust;
+    }
     #endregion
 }

@@ -14,11 +14,11 @@ public class WeaponComponent : StarshipComponent
     }
 
     [SerializeField]
-    private FactionAlignment factionAlignment;
-    public FactionAlignment FactionAlignment
+    private StarshipController controller;
+    public override StarshipController Controller
     {
-        get { return factionAlignment; }
-        set { factionAlignment = value; }
+        get { return controller; }
+        set { controller = value; }
     }
     [SerializeField]
     private float weaponRange;
@@ -103,12 +103,14 @@ public class WeaponComponent : StarshipComponent
     {
         //factionAlignment = GetComponentInParent<ActorController>().factionAlignment;
         InitComponent();
+        GetComponent<Collider>().enabled = true;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        CooldownWeapon();
+        if(operational)
+            CooldownWeapon();
     }
     #endregion
 
@@ -138,6 +140,7 @@ public class WeaponComponent : StarshipComponent
 
     public override void ApplyDamage(int amount)
     {
+        Debug.Log(controller + "'s " + gameObject.name + " Hit");
         hP -= amount;
         if (hP <= 0)
         {

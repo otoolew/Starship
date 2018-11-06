@@ -22,6 +22,13 @@ public class NPCController : StarshipController
         set { starship = value; }
     }
     [SerializeField]
+    private FactionAlignment faction;
+    public override FactionAlignment Faction
+    {
+        get { return faction; }
+        set { faction = value; }
+    }
+    [SerializeField]
     private float rotationRate;
     public override float RotationRate
     {
@@ -122,6 +129,7 @@ public class NPCController : StarshipController
 
     }
     /// <summary>
+    /// TODO: Implement in Abstract class
     /// Start is called before the first frame update only if the script instance is enabled.
     /// </summary>
     private void Start()
@@ -130,6 +138,8 @@ public class NPCController : StarshipController
         rotationRate = 180f;
         maxVelocity = starship.TotalEnginePower;
         thrustPower = starship.TotalEngineThrust;
+        maxWeaponRange = starship.MaxWeaponRange;
+        minWeaponRange = starship.MinWeaponRange;
         EulerAngleVelocity = new Vector3(0, RotationRate, 0);
     }
     /// <summary>
@@ -138,6 +148,10 @@ public class NPCController : StarshipController
     private void Update()
     {
         timer += Time.deltaTime;
+        for (int i = 0; i < starship.weapons.Length; i++)
+        {
+            FireWeapon(starship.weapons[i]);
+        }
     }
     /// <summary>
     /// All physics calculations and updates occur immediately after FixedUpdate. 
@@ -158,7 +172,16 @@ public class NPCController : StarshipController
     #endregion
     public override void FireWeapon(WeaponComponent weapon)
     {
-        weapon.Fire();
+        if (!weapon.Operational)
+            return;
+        if (currentTarget != null)
+        {
+            if (((Vector2.Distance(transform.position, currentTarget.position)) < maxWeaponRange))
+            {
+                weapon.Fire();
+            }
+        }
+
     }
     void UpdateDestination(Transform newDestination)
     {

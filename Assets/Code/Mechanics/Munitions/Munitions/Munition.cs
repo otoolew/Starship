@@ -22,10 +22,9 @@ public class Munition : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        factionAlignment = GetComponentInParent<WeaponComponent>().FactionAlignment;
+        factionAlignment = GetComponentInParent<WeaponComponent>().Controller.Faction;
         transform.parent = null;            // Unparent the bullet so it does not follow the Tank that fired it.
         Destroy(gameObject, munitionRange);      // Destroy me after a specified time.
-        //gameObject.layer = 
     }
 
     // Update is called once per frame
@@ -39,7 +38,7 @@ public class Munition : MonoBehaviour
         try
         {         
             StarshipComponent componentHit = collisonObject.GetComponent<StarshipComponent>();
-            if (componentHit.tag == "Hostile")
+            if (factionAlignment.CanHarm(componentHit.Controller.Faction))
             {
                 componentHit.ApplyDamage(munitionDamage);
                 Destroy(gameObject);
@@ -47,7 +46,7 @@ public class Munition : MonoBehaviour
         }
         catch (System.NullReferenceException)
         {
-            Debug.Log("No CollisionTag Found");
+            Debug.Log("No StarshipComponent Found");
         }
 
     }

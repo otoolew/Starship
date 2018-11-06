@@ -353,7 +353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSchematic: {fileID: 0}
-  factionAlignment: {fileID: 0}
+  controller: {fileID: 0}
   weaponRange: 0
   weaponPower: 0
   weaponCooldown: 0
@@ -379,6 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   engineSchematic: {fileID: 0}
+  controller: {fileID: 0}
   hP: 10
   operational: 0
   enginePower: 0
@@ -399,8 +400,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hullSchematic: {fileID: 0}
+  controller: {fileID: 0}
   hP: 0
   operational: 0
+  onHullDisabled:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Events+HullDisabled, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114600341074634434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -412,6 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3474de8218d95fd439a71892f699dd0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
   starshipSchematic: {fileID: 11400000, guid: ba510d0c18aef2a41ab105b470383a39, type: 2}
   hull: {fileID: 114584927389029530}
   engines:
@@ -434,6 +442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensorSchematic: {fileID: 0}
+  controller: {fileID: 0}
   sensorRange: 0
   sensorCooldown: 0
   sensorTimer: 0
@@ -453,6 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 0}
   starship: {fileID: 0}
+  faction: {fileID: 11400000, guid: 4c0b2cc91b9a13b4695c46e79db4af7a, type: 2}
   rotationRate: 0
   maxVelocity: 0
   thrustPower: 0

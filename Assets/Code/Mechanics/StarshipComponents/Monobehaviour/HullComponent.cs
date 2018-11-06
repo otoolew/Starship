@@ -12,7 +12,13 @@ public class HullComponent : StarshipComponent
         get { return hullSchematic; }
         set { hullSchematic = value; }
     }
-
+    [SerializeField]
+    private StarshipController controller;
+    public override StarshipController Controller
+    {
+        get { return controller; }
+        set { controller = value; }
+    }
     [SerializeField]
     private float hP;
     public float HP
@@ -28,9 +34,16 @@ public class HullComponent : StarshipComponent
         get { return operational; }
         private set { operational = value; }
     }
+
+    #region Events
+    public Events.HullDisabled onHullDisabled;
+    #endregion
+
+
     private void Start()
     {
         InitComponent();
+        GetComponent<Collider>().enabled = true;
     }
     public void InitComponent()
     {
@@ -42,8 +55,13 @@ public class HullComponent : StarshipComponent
 
     public override void ApplyDamage(int amount)
     {
-        Debug.Log(gameObject.name+" Hit");
-        HP -= amount;
+        Debug.Log(controller + "'s " + gameObject.name + " Hit");
+        hP -= amount;
+        if (hP <= 0)
+        {
+            operational = false;
+            onHullDisabled.Invoke(this);
+        }
     }
 
     public override void RepairDamage(int amount)

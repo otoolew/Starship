@@ -200,6 +200,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &171753316 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114908148263091774, guid: d3b722ac503fa6f4588277b6c8939c72,
+    type: 2}
+  m_PrefabInternal: {fileID: 1391921775}
+  m_Script: {fileID: 11500000, guid: 311dc4fd422d72d43a99a1269e001dd5, type: 3}
 --- !u!1 &621174408
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +333,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4235584243148898, guid: 9301d9482bb62104c832977200a6ac93, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.62
       objectReference: {fileID: 0}
     - target: {fileID: 4235584243148898, guid: 9301d9482bb62104c832977200a6ac93, type: 2}
       propertyPath: m_LocalPosition.y
@@ -335,7 +341,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4235584243148898, guid: 9301d9482bb62104c832977200a6ac93, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.055
+      value: 4.07
       objectReference: {fileID: 0}
     - target: {fileID: 4235584243148898, guid: 9301d9482bb62104c832977200a6ac93, type: 2}
       propertyPath: m_LocalRotation.x
@@ -370,6 +376,11 @@ Prefab:
     - target: {fileID: 1676816683719698, guid: 9301d9482bb62104c832977200a6ac93, type: 2}
       propertyPath: m_Name
       value: NPC_Starship_v1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114427482313812090, guid: 9301d9482bb62104c832977200a6ac93,
+        type: 2}
+      propertyPath: maxWeaponRange
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9301d9482bb62104c832977200a6ac93, type: 2}
@@ -520,6 +531,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1665645072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1665645073}
+  m_Layer: 0
+  m_Name: Dummy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1665645073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1665645072}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2.039}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1784016634
 GameObject:
@@ -904,6 +943,11 @@ Prefab:
       propertyPath: m_Navigation.m_Mode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114366165488276312, guid: b6b662cad3f27aa45874657ea8aa82c4,
+        type: 2}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 171753316}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6b662cad3f27aa45874657ea8aa82c4, type: 2}
   m_IsPrefabAsset: 0

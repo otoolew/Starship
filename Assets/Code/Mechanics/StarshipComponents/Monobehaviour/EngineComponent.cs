@@ -14,7 +14,13 @@ public class EngineComponent : StarshipComponent
         get { return engineSchematic; }
         set { engineSchematic = value; }
     }
-
+    [SerializeField]
+    private StarshipController controller;
+    public override StarshipController Controller
+    {
+        get { return controller; }
+        set { controller = value; }
+    }
     [SerializeField]
     private float hP;
     public float HP
@@ -55,6 +61,7 @@ public class EngineComponent : StarshipComponent
     private void Start()
     {
         InitComponent();
+        GetComponent<Collider>().enabled = true;
     }
 
     public override void ApplyDamage(int amount)

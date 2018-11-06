@@ -85,8 +85,7 @@ MonoBehaviour:
   munitionRange: 1
   munitionSpeed: 10
   munitionDamage: 100
-  OwnerTag: 
-  EnemyTag: 
+  factionAlignment: {fileID: 0}
 --- !u!135 &135254078231093974
 SphereCollider:
   m_ObjectHideFlags: 1

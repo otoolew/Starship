@@ -12,7 +12,13 @@ public class SensorComponent : StarshipComponent {
         get { return sensorSchematic; }
         set { sensorSchematic = value; }
     }
-
+    [SerializeField]
+    private StarshipController controller;
+    public override StarshipController Controller
+    {
+        get { return controller; }
+        set { controller = value; }
+    }
     [SerializeField]
     private float sensorRange;
     public float SensorRange

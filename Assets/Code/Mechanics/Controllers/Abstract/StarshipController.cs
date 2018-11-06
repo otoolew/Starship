@@ -8,6 +8,7 @@ public abstract class StarshipController : MonoBehaviour
 {
     public abstract Rigidbody RigidBody { get; set; }
     public abstract Starship Starship { get; set; }
+    public abstract FactionAlignment Faction { get; set; }
     public abstract float RotationRate { get; set; }
     public abstract float MaxVelocity { get; set; }
     public abstract float ThrustPower { get; set; }
