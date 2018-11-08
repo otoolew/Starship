@@ -20,7 +20,7 @@ public class WeaponSlot : MonoBehaviour
     void Start ()
     {
         playerController = FindObjectOfType<PlayerController>();
-        weaponName.text = playerController.Starship.weapons[slot].WeaponSchematic.partName;
+        weaponName.text = playerController.Starship.weapons[slot].WeaponSchematic.partName;f
     }
 	
 	// Update is called once per frame
