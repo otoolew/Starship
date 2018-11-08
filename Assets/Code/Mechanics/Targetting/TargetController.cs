@@ -41,7 +41,7 @@ public class TargetController : MonoBehaviour
     {
         npcController = GetComponent<NPCController>();
         targetSensor = GetComponentInChildren<TargetSensor>();
-        targetSensor.FactionAlignment = npcController.factionAlignment;
+        //targetSensor.FactionAlignment = npcController.fa;
 
         targetSensor.onValidTargetFound.AddListener(HandleValidTargetFound);
         //npcController.onTargetDeath.AddListener(HandleTargetLost);
@@ -59,7 +59,7 @@ public class TargetController : MonoBehaviour
         {
             trackedTargets.Add(target);
             target.onTargetDeath.AddListener(HandleTargetLost);
-            Debug.Log(npcController.ActorName + " [TargetSensor] Found a target.");
+            //Debug.Log(npcController.ActorName + " [TargetSensor] Found a target.");
 
             HasValidTarget = HasTarget();
         }          
@@ -68,7 +68,7 @@ public class TargetController : MonoBehaviour
     public void HandleTargetLost(ActorController target)
     {
         trackedTargets.Remove(target);        
-        Debug.Log(npcController.ActorName + " [TargetSensor] Lost a target.");
+        //Debug.Log(npcController.ActorName + " [TargetSensor] Lost a target.");
         HasValidTarget = HasTarget();
     }
 
@@ -83,13 +83,14 @@ public class TargetController : MonoBehaviour
     /// <returns>true if targetable is vaild, false if not</returns>
     private bool IsTargetableValid(ActorController target)
     {
-        Debug.Log(npcController.ActorName + "[TargetController] Checking Target...");
+        //Debug.Log(npcController.ActorName + "[TargetController] Checking Target...");
         if (target == null)
         {
             return false;
         }
-        Debug.Log(npcController.ActorName + "[TargetController] target is not hostile.");
-        return npcController.factionAlignment.CanHarm(target.factionAlignment);
+        //Debug.Log(npcController.ActorName + "[TargetController] target is not hostile.");
+        //return npcController.factionAlignment.CanHarm(target.factionAlignment);
+        return true;
     }
 
     public bool HasTarget()
