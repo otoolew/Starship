@@ -17,12 +17,17 @@ public class Munition : MonoBehaviour
     [Header("How much damage do I do?")]
     public int munitionDamage;
     [Header("Who do I belong to?")]
-    public FactionAlignment factionAlignment;
+    public StarshipController ownerController;
 
+    private void Awake()
+    {
+        
+
+    }
     // Use this for initialization
     private void Start()
     {
-        factionAlignment = GetComponentInParent<WeaponComponent>().Controller.Faction;
+        ownerController = GetComponentInParent<WeaponComponent>().Controller;
         transform.parent = null;            // Unparent the bullet so it does not follow the Tank that fired it.
         Destroy(gameObject, munitionRange);      // Destroy me after a specified time.
     }
@@ -35,19 +40,24 @@ public class Munition : MonoBehaviour
 
     private void OnTriggerEnter(Collider collisonObject)
     {
+
+        if (collisonObject.CompareTag("Impact"))
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         try
-        {         
+        {
             StarshipComponent componentHit = collisonObject.GetComponent<StarshipComponent>();
-            if (factionAlignment.CanHarm(componentHit.Controller.Faction))
-            {
+
+            if (ownerController.Faction.CanHarm(componentHit.Controller.Faction))
                 componentHit.ApplyDamage(munitionDamage);
-                Destroy(gameObject);
-            }
         }
         catch (System.NullReferenceException)
         {
-            Debug.Log("No StarshipComponent Found");
+            //Debug.Log("No StarshipComponent Found.");
         }
-
+        Destroy(gameObject); // TODO: Deactivate and return to Pool
     }
 }

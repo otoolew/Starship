@@ -21,6 +21,13 @@ public class WeaponComponent : StarshipComponent
         set { controller = value; }
     }
     [SerializeField]
+    private Transform firePoint;
+    public Transform FirePoint
+    {
+        get { return firePoint; }
+        set { firePoint = value; }
+    }
+    [SerializeField]
     private float weaponRange;
     public float WeaponRange
     {
@@ -132,7 +139,7 @@ public class WeaponComponent : StarshipComponent
     {
         if (WeaponReady)
         {
-            Instantiate(WeaponSchematic.munitionPrefab, transform);
+            Instantiate(WeaponSchematic.munitionPrefab, firePoint);
             WeaponTimer = WeaponCooldown;
             WeaponReady = false;
         }

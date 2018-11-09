@@ -11,6 +11,21 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1676816683719698}
   m_IsPrefabAsset: 1
+--- !u!1 &1330571504750640
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4351325524477324}
+  m_Layer: 9
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1350459493683038
 GameObject:
   m_ObjectHideFlags: 1
@@ -253,12 +268,25 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1676816683719698}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.055}
+  m_LocalPosition: {x: 0.13, y: 0, z: 1.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4193460124504956}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4351325524477324
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1330571504750640}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.275}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4875202448616092}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4372913588947360
 Transform:
@@ -311,6 +339,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4027793967344694}
+  - {fileID: 4351325524477324}
   m_Father: {fileID: 4193460124504956}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -395,6 +424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSchematic: {fileID: 0}
   controller: {fileID: 0}
+  firePoint: {fileID: 4351325524477324}
   weaponRange: 0
   weaponPower: 0
   weaponCooldown: 0
@@ -425,7 +455,7 @@ MonoBehaviour:
   rotationRate: 0
   maxVelocity: 0
   thrustPower: 0
-  maxWeaponRange: 2
+  maxWeaponRange: 0
   minWeaponRange: 0
   navDestination: {fileID: 0}
   currentTarget: {fileID: 0}
@@ -455,9 +485,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 114250670545259836}
   sensor: {fileID: 114920889977597874}
-  totalEnginePower: 0
   minWeaponRange: 0
-  maxWeaponRange: 0
 --- !u!114 &114920889977597874
 MonoBehaviour:
   m_ObjectHideFlags: 1

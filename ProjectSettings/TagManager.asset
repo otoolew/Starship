@@ -4,8 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Hostile
-  - Ship
+  - Impact
   layers:
   - Default
   - TransparentFX
@@ -18,7 +17,7 @@ TagManager:
   - PostProcessing
   - Damagable
   - Munition
-  - 
+  - Collidable
   - 
   - 
   - 

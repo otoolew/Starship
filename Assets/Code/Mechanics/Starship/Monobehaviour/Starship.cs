@@ -86,12 +86,12 @@ public class Starship : MonoBehaviour
     }
     private void HandleHullDisabled(HullComponent disabledHull)
     {
-        Debug.Log(disabledHull.name + " is disabled");
+        Debug.Log(disabledHull.name + " is disabled. TODO: Implement what happens next");
     }
     private void HandleWeaponDisabled(WeaponComponent disabledWeapon)
     {
         disabledWeapon.GetComponent<Collider>().enabled = false;
-        Debug.Log(disabledWeapon.name + " is disabled");
+        Debug.Log(disabledWeapon.name + " is disabled. TODO: Implement what happens next");
     }
     private void HandleEngineDisabled(EngineComponent disabledEngine)
     {

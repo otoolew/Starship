@@ -77,7 +77,7 @@ public class NPCController : StarshipController
         get { return navDestination; }
         private set { navDestination = value; }
     }
-
+// TODO: Implement Central Target Manager for Computer Player
     [SerializeField]
     private Transform currentTarget;
     public Transform CurrentTarget
