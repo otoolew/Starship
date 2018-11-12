@@ -160,4 +160,8 @@ public class WeaponComponent : StarshipComponent
     {
         hP += amount;
     }
+    public override void DisableEffect()
+    {
+        throw new System.NotImplementedException();
+    }
 }

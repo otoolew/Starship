@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
@@ -14,7 +15,14 @@ public abstract class StarshipController : MonoBehaviour
     public abstract float ThrustPower { get; set; }
     public abstract float MaxWeaponRange { get; set; }
     public abstract float MinWeaponRange { get; set; }
+    public abstract int ResourceCurrency { get; set; }
+    public abstract bool Dead { get; set; }
     public abstract void FireWeapon(WeaponComponent weapon);
     public abstract void AccelerateStarship();
     public abstract void RotateStarship();
+    public abstract void HandleDeath();
+    public abstract void HandleCargoFull();
+
+    public abstract event Action<StarshipController> removed;
+
 }

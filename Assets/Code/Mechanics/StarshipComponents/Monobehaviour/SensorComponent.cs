@@ -98,4 +98,8 @@ public class SensorComponent : StarshipComponent {
     {
         hP += amount;
     }
+    public override void DisableEffect()
+    {
+        throw new System.NotImplementedException();
+    }
 }

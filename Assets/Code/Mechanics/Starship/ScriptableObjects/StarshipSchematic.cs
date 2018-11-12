@@ -8,5 +8,5 @@ public class StarshipSchematic : ScriptableObject
     public HullSchematic hullSchematic;
     public EngineSchematic[] engineSchematics;
     public WeaponSchematic[] weaponSchematics;
-    public SensorSchematic sensorSchematic;
+    public CargoSchematic cargoSchematic;
 }

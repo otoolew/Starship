@@ -79,4 +79,8 @@ public class EngineComponent : StarshipComponent
         hP += amount;
     }
 
+    public override void DisableEffect()
+    {
+        Controller.Starship.TotalEnginePower -= enginePower;
+    }
 }

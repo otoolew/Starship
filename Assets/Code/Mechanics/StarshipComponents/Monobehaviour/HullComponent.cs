@@ -68,4 +68,8 @@ public class HullComponent : StarshipComponent
     {
         hP += amount;
     }
+    public override void DisableEffect()
+    {
+        //Controller.StarshipDied.Invoke(); ;
+    }
 }

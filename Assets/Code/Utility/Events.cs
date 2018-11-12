@@ -12,14 +12,8 @@ public class Events
     [Serializable] public class FadeComplete : UnityEvent<bool> { }
     [Serializable] public class SceneChangeComplete : UnityEvent<bool> { }
     [Serializable] public class PlayerDeath : UnityEvent<bool> { }
-    [Serializable] public class TargetDeath : UnityEvent<ActorController> { }
-    [Serializable] public class ValidTargetScan : UnityEvent<ActorController> { }
-    [Serializable] public class AcquiredTarget : UnityEvent<ActorController> { }
-    [Serializable] public class TargetInSight : UnityEvent<ActorController> { }
     [Serializable] public class InventorySlotSwap : UnityEvent<InventorySlot, InventorySlot> { }
-
     [Serializable] public class HullDisabled : UnityEvent<HullComponent> { }
     [Serializable] public class EngineDisabled : UnityEvent<EngineComponent> { }
     [Serializable] public class WeaponDisabled : UnityEvent<WeaponComponent> { }
-
 }

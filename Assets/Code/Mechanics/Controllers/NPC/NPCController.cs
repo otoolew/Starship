@@ -3,6 +3,8 @@
 //  Project: Starship
 //  NOV 2018
 // ----------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 public class NPCController : StarshipController
 {
@@ -67,23 +69,38 @@ public class NPCController : StarshipController
         set { minWeaponRange = value; }
     }
 
+    [SerializeField]
+    private int resourceCurrency;
+    public override int ResourceCurrency
+    {
+        get { return resourceCurrency; }
+        set { resourceCurrency = value; }
+    }
+
+    [SerializeField]
+    private bool dead;
+    public override bool Dead
+    {
+        get { return dead; }
+        set { dead = value; }
+    }
     #endregion
 
     #region NPC Logic Props and Vars
     [SerializeField]
-    private Transform navDestination;
-    public Transform NavDestination
+    private DestinationController destinationController;
+    public DestinationController DestinationController
     {
-        get { return navDestination; }
-        private set { navDestination = value; }
+        get { return destinationController; }
+        private set { destinationController = value; }
     }
-// TODO: Implement Central Target Manager for Computer Player
+
     [SerializeField]
-    private Transform currentTarget;
-    public Transform CurrentTarget
+    private TargetController targetController;
+    public TargetController TargetController
     {
-        get { return currentTarget; }
-        private set { currentTarget = value; }
+        get { return targetController; }
+        private set { targetController = value; }
     }
 
     [SerializeField]
@@ -103,11 +120,14 @@ public class NPCController : StarshipController
     }
 
     public Vector3 EulerAngleVelocity { get; set; }
+
+    public override event Action<StarshipController> removed;
+
     float timer;
     #endregion
 
-    #region EventHandlers
-    public Events.WeaponDisabled partDisabled;
+    #region Events
+
     #endregion
 
     #region Monobehaviour
@@ -134,7 +154,6 @@ public class NPCController : StarshipController
     /// </summary>
     private void Start()
     {
-        navDestination = gameObject.transform;
         rotationRate = 180f;
         maxVelocity = starship.TotalEnginePower;
         thrustPower = starship.TotalEngineThrust;
@@ -148,9 +167,13 @@ public class NPCController : StarshipController
     private void Update()
     {
         timer += Time.deltaTime;
-        for (int i = 0; i < starship.weapons.Length; i++)
-        {
-            FireWeapon(starship.weapons[i]);
+        // TODO: NPC's fire even when not aiming at target
+        if (targetController.CurrentTarget != null)
+        {            
+            for (int i = 0; i < starship.weapons.Length; i++)
+            {
+                FireWeapon(starship.weapons[i]);
+            }
         }
     }
     /// <summary>
@@ -174,36 +197,30 @@ public class NPCController : StarshipController
     {
         if (!weapon.Operational)
             return;
-        if (currentTarget != null)
+        if (((Vector2.Distance(transform.position, targetController.CurrentTarget.transform.position)) < maxWeaponRange))
         {
-            if (((Vector2.Distance(transform.position, currentTarget.position)) < maxWeaponRange))
-            {
-                weapon.Fire();
-            }
+            weapon.Fire();
         }
 
     }
-    void UpdateDestination(Transform newDestination)
-    {
-        navDestination = newDestination;
-    }
+
     public override void AccelerateStarship()
     {
-        if (currentTarget != null)
+        if (targetController.CurrentTarget != null)
         {
-            if (((Vector2.Distance(transform.position, currentTarget.position)) > maxWeaponRange) && (timer > thrustPace))
+            if (((Vector2.Distance(transform.position, targetController.CurrentTarget.transform.position)) > maxWeaponRange) && (timer > thrustPace))
             {
-                rigidBody.AddForce((currentTarget.position - transform.position) * ThrustPower);
+                rigidBody.AddForce((targetController.CurrentTarget.transform.position - transform.position) * ThrustPower);
                 timer = 0;
             }
         }
         else
         {
-            if((Vector2.Distance(transform.position, navDestination.position)) > stopDistance)
+            if((Vector2.Distance(transform.position, destinationController.NavDestination.position)) > stopDistance)
             {
                 if (timer > thrustPace)
                 {
-                    rigidBody.AddForce((navDestination.position - transform.position) * ThrustPower);
+                    rigidBody.AddForce((destinationController.NavDestination.position - transform.position) * ThrustPower);
                     timer = 0;
                 }
             }
@@ -220,10 +237,10 @@ public class NPCController : StarshipController
     {
         Vector3 rotVector = Vector3.zero;
 
-        if (currentTarget != null)
-            rotVector = currentTarget.transform.position - transform.position;
+        if (targetController.CurrentTarget != null)
+            rotVector = targetController.CurrentTarget.transform.position - transform.position;
         else
-            rotVector = navDestination.transform.position - transform.position;
+            rotVector = destinationController.NavDestination.position - transform.position;
 
         if(rotVector != Vector3.zero)
         {
@@ -232,6 +249,15 @@ public class NPCController : StarshipController
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, Time.deltaTime * RotationRate);
         }
+    }
+    public override void HandleCargoFull()
+    {
+        destinationController.UpdateDestination(destinationController.HomeBase);
+    }
+    public override void HandleDeath()
+    {
+        removed.Invoke(this);
+        Destroy(this);
     }
     void OnDrawGizmosSelected()
     {

@@ -3,6 +3,7 @@
 //  Project: Starship
 //  NOV 2018
 // ----------------------------------------------------------------------------
+using System;
 using UnityEngine;
 
 public class PlayerController : StarshipController
@@ -67,6 +68,20 @@ public class PlayerController : StarshipController
         get { return minWeaponRange; }
         set { minWeaponRange = value; }
     }
+    [SerializeField]
+    private int resourceCurrency;
+    public override int ResourceCurrency
+    {
+        get { return resourceCurrency; }
+        set { resourceCurrency = value; }
+    }
+    [SerializeField]
+    private bool dead;
+    public override bool Dead
+    {
+        get { return dead; }
+        set { dead = value; }
+    }
     #endregion
     #region PlayerInput Props and Vars
     public float ThrustInput { get; set; }
@@ -79,7 +94,7 @@ public class PlayerController : StarshipController
     #endregion
 
     #region EventHandlers
-    public Events.WeaponDisabled partDisabled;
+    public override event Action<StarshipController> removed;
     #endregion
 
 
@@ -112,7 +127,7 @@ public class PlayerController : StarshipController
         thrustPower = starship.TotalEngineThrust;
         maxWeaponRange = starship.MaxWeaponRange;
         minWeaponRange = starship.MinWeaponRange;
-        EulerAngleVelocity = new Vector3(0, RotationRate, 0);
+        EulerAngleVelocity = new Vector3(0, RotationRate, 0);        
     }
     /// <summary>
     /// Update is called once per frame. It is the main workhorse function for frame updates.
@@ -165,5 +180,14 @@ public class PlayerController : StarshipController
     {
         Quaternion rotation = Quaternion.Euler(EulerAngleVelocity * RotationInput * Time.deltaTime);
         rigidBody.MoveRotation(rigidBody.rotation * rotation);
+    }
+    public override void HandleCargoFull()
+    {
+        Debug.Log("Cargo Full");
+    }
+    public override void HandleDeath()
+    {
+        removed.Invoke(this);
+        gameObject.SetActive(false);
     }
 }

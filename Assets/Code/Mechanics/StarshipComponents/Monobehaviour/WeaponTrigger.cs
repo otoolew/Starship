@@ -25,7 +25,7 @@ public class WeaponTrigger : MonoBehaviour
 	{
         if (targetController.CurrentTarget != null)
         {
-            if(targetController.DistanceToTarget() < parentWeapon.WeaponRange)
+            if(Vector3.Distance(transform.position, targetController.CurrentTarget.transform.position) < parentWeapon.WeaponRange)
             {
                 parentWeapon.Fire();
             }

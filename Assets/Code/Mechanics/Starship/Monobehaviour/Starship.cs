@@ -9,7 +9,7 @@ public class Starship : MonoBehaviour
     public HullComponent hull;
     public EngineComponent[] engines;
     public WeaponComponent[] weapons;
-    public SensorComponent sensor;
+    public CargoComponent cargo;
 
     public float TotalEnginePower { get; set; }
 
@@ -55,10 +55,12 @@ public class Starship : MonoBehaviour
         // Hull
         hull.HullSchematic = starshipSchematic.hullSchematic;
         hull.Controller = controller;
+
         hull.onHullDisabled.AddListener(HandleHullDisabled); // Subscribe
-        // Sensor
-        sensor.SensorSchematic = starshipSchematic.sensorSchematic;
-        sensor.Controller = controller;
+
+        // Cargo
+        cargo.CargoSchematic = starshipSchematic.cargoSchematic;
+        cargo.Controller = controller;
         // Engines
         if (engines.Length == 0)
             return;
@@ -86,7 +88,8 @@ public class Starship : MonoBehaviour
     }
     private void HandleHullDisabled(HullComponent disabledHull)
     {
-        Debug.Log(disabledHull.name + " is disabled. TODO: Implement what happens next");
+        Debug.Log(disabledHull.name + " is disabled. TODO: Implement Death");
+        controller.HandleDeath();
     }
     private void HandleWeaponDisabled(WeaponComponent disabledWeapon)
     {
