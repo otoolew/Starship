@@ -56,6 +56,7 @@ public class TargetController : MonoBehaviour
         get { return scanRadius; }
         private set { scanRadius = value; }
     }
+
     /// <summary>
     /// Fires when a targetable enters the target collider
     /// </summary>
@@ -220,7 +221,8 @@ public class TargetController : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        searchTimer -= Time.deltaTime;
+        if (!(searchTimer <= 0.0f))
+            searchTimer -= Time.deltaTime;
 
         if (searchTimer <= 0.0f && CurrentTarget == null && targetsInRange.Count > 0)
         {

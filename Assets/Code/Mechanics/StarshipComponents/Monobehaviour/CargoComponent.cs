@@ -49,6 +49,10 @@ public class CargoComponent : StarshipComponent
         get { return cargoLoadReady; }
         set { cargoLoadReady = value; }
     }
+
+    [SerializeField]
+    private int resourcesLoaded;
+
     [SerializeField]
     private float hP;
     public float HP
@@ -102,13 +106,35 @@ public class CargoComponent : StarshipComponent
         }
         if (cargoLoadReady)
         {
-            controller.ResourceCurrency++;
+            resourcesLoaded++;
             cargoLoadTimer = cargoLoadCooldown;
-            if(controller.ResourceCurrency > CargoLoadCapacity)
+            if(resourcesLoaded > CargoLoadCapacity)
             {
-                controller.HandleCargoFull();
+                try
+                {
+                    controller.GetComponent<DestinationController>().UpdateDestination(controller.CapitalStarship.ResourceDropPoint);
+                }
+                catch (System.Exception)
+                {
+                    Debug.Log("Player Cargo");
+                }
+
             }
         }
+    }
+    public int UnloadCargo()
+    {
+        int amount = resourcesLoaded;
+        resourcesLoaded = 0;
+        try
+        {
+            controller.GetComponent<DestinationController>().UpdateDestination(controller.CapitalStarship.resourceFields[0].transform);
+        }
+        catch (System.Exception)
+        {
+            Debug.Log("Player Cargo");
+        }
+        return amount;
     }
     private void CooldownCargoLoader()
     {

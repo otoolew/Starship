@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 65013825560772356}
   m_Layer: 0
   m_Name: Cargo
-  m_TagString: Untagged
+  m_TagString: Cargo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -326,7 +326,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1878294132229704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.88}
+  m_LocalPosition: {x: 2.58, y: 0, z: -4.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4026408645952354}
@@ -361,7 +361,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!65 &65013825560772356
 BoxCollider:
@@ -400,9 +400,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cargoSchematic: {fileID: 11400000, guid: 558476d5d158c0047a42fcb05f30bb4a, type: 2}
   controller: {fileID: 0}
+  cargoLoadCapacity: 0
   cargoLoadCooldown: 1
   cargoLoadTimer: 1
   cargoLoadReady: 0
+  resourcesLoaded: 0
   hP: 10
   operational: 1
 --- !u!114 &114042436527637900
@@ -471,17 +473,19 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   starship: {fileID: 0}
   faction: {fileID: 11400000, guid: 4c0b2cc91b9a13b4695c46e79db4af7a, type: 2}
+  capitalStarship: {fileID: 0}
   rotationRate: 0
   maxVelocity: 0
   thrustPower: 0
   maxWeaponRange: 0
   minWeaponRange: 0
-  resourceCurrency: 0
+  loadedResources: 0
   dead: 0
   destinationController: {fileID: 114042436527637900}
   targetController: {fileID: 114081702596070974}
   thrustPace: 0
   stopDistance: 0
+  assignedRole: {fileID: 11400000, guid: bc6e2c0fb03857548a77b907c49f7efe, type: 2}
 --- !u!114 &114454696699211118
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -16,6 +16,6 @@ MonoBehaviour:
   partSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   HP: 10
   cargoPrefab: {fileID: 0}
-  cargoLoadCapacity: 10
+  cargoLoadCapacity: 2
   cargoLoadCooldown: 1
   cargoLoadTimer: 1

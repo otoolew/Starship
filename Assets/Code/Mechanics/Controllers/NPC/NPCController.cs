@@ -31,6 +31,13 @@ public class NPCController : StarshipController
         set { faction = value; }
     }
     [SerializeField]
+    private CapitalStarship capitalStarship;
+    public override CapitalStarship CapitalStarship
+    {
+        get { return capitalStarship; }
+        set { capitalStarship = value; }
+    }
+    [SerializeField]
     private float rotationRate;
     public override float RotationRate
     {
@@ -70,11 +77,11 @@ public class NPCController : StarshipController
     }
 
     [SerializeField]
-    private int resourceCurrency;
-    public override int ResourceCurrency
+    private int loadedResources;
+    public override int LoadedResources
     {
-        get { return resourceCurrency; }
-        set { resourceCurrency = value; }
+        get { return loadedResources; }
+        set { loadedResources = value; }
     }
 
     [SerializeField]
@@ -129,7 +136,15 @@ public class NPCController : StarshipController
     #region Events
 
     #endregion
-
+    #region Role Assignment
+    [SerializeField]
+    private RoleAssignment assignedRole;
+    public RoleAssignment AssignedRole
+    {
+        get { return assignedRole; }
+        private set { assignedRole = value; }
+    }
+    #endregion
     #region Monobehaviour
     /// <summary>
     /// This function is always called before any Start functions and also just after a prefab is instantiated.
@@ -160,6 +175,7 @@ public class NPCController : StarshipController
         maxWeaponRange = starship.MaxWeaponRange;
         minWeaponRange = starship.MinWeaponRange;
         EulerAngleVelocity = new Vector3(0, RotationRate, 0);
+        assignedRole.PerformTask(this);
     }
     /// <summary>
     /// Update is called once per frame. It is the main workhorse function for frame updates.
@@ -167,6 +183,7 @@ public class NPCController : StarshipController
     private void Update()
     {
         timer += Time.deltaTime;
+
         // TODO: NPC's fire even when not aiming at target
         if (targetController.CurrentTarget != null)
         {            
@@ -193,6 +210,7 @@ public class NPCController : StarshipController
 
     }
     #endregion
+
     public override void FireWeapon(WeaponComponent weapon)
     {
         if (!weapon.Operational)
@@ -250,10 +268,12 @@ public class NPCController : StarshipController
             transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, Time.deltaTime * RotationRate);
         }
     }
-    public override void HandleCargoFull()
-    {
-        destinationController.UpdateDestination(destinationController.HomeBase);
-    }
+
+    //public void CargoEmpty()
+    //{
+    //    destinationController.UpdateDestination(capitalStarship.resourceFields[0].transform);
+    //}
+
     public override void HandleDeath()
     {
         removed.Invoke(this);

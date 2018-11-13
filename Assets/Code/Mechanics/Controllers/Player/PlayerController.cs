@@ -31,6 +31,13 @@ public class PlayerController : StarshipController
         set { faction = value; }
     }
     [SerializeField]
+    private CapitalStarship capitalStarship;
+    public override CapitalStarship CapitalStarship
+    {
+        get { return capitalStarship; }
+        set { capitalStarship = value; }
+    }
+    [SerializeField]
     private float rotationRate;
     public override float RotationRate
     {
@@ -69,11 +76,11 @@ public class PlayerController : StarshipController
         set { minWeaponRange = value; }
     }
     [SerializeField]
-    private int resourceCurrency;
-    public override int ResourceCurrency
+    private int loadedResources;
+    public override int LoadedResources
     {
-        get { return resourceCurrency; }
-        set { resourceCurrency = value; }
+        get { return loadedResources; }
+        set { loadedResources = value; }
     }
     [SerializeField]
     private bool dead;
@@ -181,10 +188,7 @@ public class PlayerController : StarshipController
         Quaternion rotation = Quaternion.Euler(EulerAngleVelocity * RotationInput * Time.deltaTime);
         rigidBody.MoveRotation(rigidBody.rotation * rotation);
     }
-    public override void HandleCargoFull()
-    {
-        Debug.Log("Cargo Full");
-    }
+
     public override void HandleDeath()
     {
         removed.Invoke(this);
