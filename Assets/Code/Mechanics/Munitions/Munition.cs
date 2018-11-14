@@ -51,6 +51,7 @@ public class Munition : MonoBehaviour
         {
             StarshipComponent componentHit = collisonObject.GetComponent<StarshipComponent>();
 
+
             if (owningFaction.factionAlignment.CanHarm(componentHit.Starship.controller.Faction.factionAlignment))
                 componentHit.ApplyDamage(munitionDamage);
         }

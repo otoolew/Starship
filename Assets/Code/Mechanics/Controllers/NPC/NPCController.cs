@@ -147,9 +147,10 @@ public class NPCController : StarshipController
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
+        faction = GetComponent<Faction>();
         starship = GetComponentInChildren<Starship>();
         navAgent = GetComponent<NavAgentController>();
-        faction = GetComponent<Faction>();
+
     }
     /// <summary>
     /// (only called if the Object is active): This function is called just after the object is enabled. 

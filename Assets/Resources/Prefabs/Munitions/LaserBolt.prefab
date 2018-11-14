@@ -83,9 +83,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   munitionRange: 2
-  munitionSpeed: 10
+  munitionSpeed: 20
   munitionDamage: 50
-  factionAlignment: {fileID: 0}
+  owningFaction: {fileID: 0}
 --- !u!136 &136420131013457104
 CapsuleCollider:
   m_ObjectHideFlags: 1

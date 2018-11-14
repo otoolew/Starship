@@ -19,4 +19,4 @@ MonoBehaviour:
     type: 2}
   weaponRange: 2
   weaponPower: 2
-  weaponCooldown: 1
+  weaponCooldown: 0.5

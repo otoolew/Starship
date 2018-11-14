@@ -4,45 +4,46 @@ using UnityEngine;
 
 public static class StarshipFactory
 {
-    #region Public
-    public static GameObject Create(string name)
+    #region Private
+    //public static GameObject InstantiatePrefab(StarshipSchematic schematic)
+    //{
+    //    NPCController controller = Resources.Load<NPCController>("NPCController");
+    //    GameObject starshipPrefab = Resources.Load<GameObject>(schematic.starshipRole.ToString());
+
+    //    starshipPrefab.transform.parent = controller.transform;
+    //    if (starshipPrefab == null)
+    //    {
+    //        Debug.LogError("No Prefab for name: " + schematic.starshipRole.ToString());
+    //        return new GameObject(schematic.starshipRole.ToString());
+    //    }
+    //    GameObject instance = GameObject.Instantiate(starshipPrefab);
+    //    instance.name = instance.name.Replace("(Clone)", "");
+    //    return instance;
+    //}
+
+    public static NPCController InstantiatePrefab(StarshipSchematic schematic)
     {
-        StarshipSchematic schematic = Resources.Load<StarshipSchematic>("Schematics/Starships/" + name);
-        if (schematic == null)
+        NPCController controller = Resources.Load<NPCController>("NPC_Starship");
+        GameObject starshipPrefab = Resources.Load<GameObject>(schematic.starshipRole.ToString());
+
+        if (starshipPrefab == null)
         {
-            Debug.LogError("No Unit Recipe for name: " + name);
+            Debug.LogError("No Prefab for name: " + schematic.starshipRole.ToString());
             return null;
         }
-        return Create(schematic);
-    }
 
-    public static GameObject Create(StarshipSchematic schematic)
-    {
-        GameObject obj = InstantiatePrefab("Prefabs/Starships/" + schematic.name);
-        obj.name = schematic.name;
-        return obj;
-    }
-    #endregion
+        starshipPrefab.transform.parent = controller.transform;
 
-    #region Private
-    static GameObject InstantiatePrefab(string name)
-    {
-        GameObject prefab = Resources.Load<GameObject>(name);
-        if (prefab == null)
-        {
-            Debug.LogError("No Prefab for name: " + name);
-            return new GameObject(name);
-        }
-        GameObject instance = GameObject.Instantiate(prefab);
+        NPCController instance = NPCController.Instantiate(controller);
         instance.name = instance.name.Replace("(Clone)", "");
         return instance;
     }
 
-    //static void AddStats(GameObject obj)
-    //{
-    //    Stats s = obj.AddComponent<Stats>();
-    //    s.SetValue(StatTypes.LVL, 1, false);
-    //}
+    ////static void AddStats(GameObject obj)
+    ////{
+    ////    Stats s = obj.AddComponent<Stats>();
+    ////    s.SetValue(StatTypes.LVL, 1, false);
+    ////}
 
     //static void AddJob(GameObject obj, string name)
     //{

@@ -5,6 +5,7 @@ using UnityEngine;
 public class StarshipSchematic : ScriptableObject
 {
     public string modelName;
+    public Enums.StarshipRole starshipRole;
     public HullSchematic hullSchematic;
     public EngineSchematic[] engineSchematics;
     public WeaponSchematic[] weaponSchematics;

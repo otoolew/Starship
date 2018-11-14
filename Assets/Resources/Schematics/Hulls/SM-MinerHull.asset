@@ -9,10 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 230bacfb099bbbb43870670054a9e349, type: 3}
-  m_Name: SF-EP_Hull
+  m_Name: SM-MinerHull
   m_EditorClassIdentifier: 
-  partName: SF-EP Mk2
+  partName: Miner Hull
   partType: 1
-  partSprite: {fileID: 21300000, guid: b0464d232ae1b4b718eabf712112fe3d, type: 3}
-  HP: 100
+  partSprite: {fileID: 21300000, guid: 3cde45f46065d40f799a1752aaa6dab8, type: 3}
+  HP: 50
   cargoMaxCapacity: 10

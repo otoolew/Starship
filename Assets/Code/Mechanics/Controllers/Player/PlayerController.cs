@@ -91,6 +91,8 @@ public class PlayerController : StarshipController
 
     #region Player Keys
     public KeyCode firePrimaryWeapon;
+    public KeyCode fireSecondaryWeapon;
+
     #endregion
 
     #region EventHandlers
@@ -141,6 +143,10 @@ public class PlayerController : StarshipController
         if (Input.GetKey(firePrimaryWeapon))
         {
             FireWeapon(starship.weapons[0]); //TODO: Make Dynamic
+        }
+        if (Input.GetKey(fireSecondaryWeapon))
+        {
+            FireWeapon(starship.weapons[1]); //TODO: Make Dynamic
         }
     }
     /// <summary>

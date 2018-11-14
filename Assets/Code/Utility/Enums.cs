@@ -7,7 +7,7 @@ public class Enums
 {
     [Serializable] public enum NPCState {IDLE, PATROL, ENGAGING }
     [Serializable] public enum WayPointType { LINKED, RANDOM, LOOP }
-    [Serializable] public enum PointOfInterestType { TIMED, OBJECTIVE, LINGER }
-    [Serializable] public enum ItemType { NONE, COLLECTABLE, EQUIPPABLE, MISC};
+    [Serializable] public enum StarshipRole { FIGHTER, MINER }
     [Serializable] public enum PartComponentType { WEAPON, HULL, ENGINE, UTILITY };
+    [Serializable] public enum ItemType { NONE, COLLECTABLE, EQUIPPABLE, MISC};
 }
