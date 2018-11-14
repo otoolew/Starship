@@ -15,12 +15,13 @@ public class EngineComponent : StarshipComponent
         set { engineSchematic = value; }
     }
     [SerializeField]
-    private StarshipController controller;
-    public override StarshipController Controller
+    private Starship starship;
+    public override Starship Starship
     {
-        get { return controller; }
-        set { controller = value; }
+        get { return starship; }
+        set { starship = value; }
     }
+
     [SerializeField]
     private float hP;
     public float HP
@@ -51,6 +52,7 @@ public class EngineComponent : StarshipComponent
     public void InitComponent()
     {
         GetComponentInChildren<SpriteRenderer>().sprite = engineSchematic.partSprite;
+        starship = GetComponentInParent<Starship>();
         enginePower = engineSchematic.enginePower;
         operational = true;
     }
@@ -81,6 +83,6 @@ public class EngineComponent : StarshipComponent
 
     public override void DisableEffect()
     {
-        Controller.Starship.TotalEnginePower -= enginePower;
+        starship.TotalEnginePower -= enginePower;
     }
 }

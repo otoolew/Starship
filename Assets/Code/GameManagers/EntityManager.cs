@@ -58,7 +58,7 @@ public class EntityManager : Singleton<EntityManager>
         float closestDistance = 100f;
         for (int i = 0; i < starshipControllers.Count; i++)
         {
-            if (s.Faction.CanHarm(starshipControllers[i].Faction))
+            if (s.Faction.factionAlignment.CanHarm(starshipControllers[i].Faction.factionAlignment))
             {
                 float distance = Vector2.Distance(s.transform.position, starshipControllers[i].transform.position);
                 if (distance < closestDistance)

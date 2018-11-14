@@ -24,8 +24,8 @@ public class PlayerController : StarshipController
         set { starship = value; }
     }
     [SerializeField]
-    private FactionAlignment faction;
-    public override FactionAlignment Faction
+    private Faction faction;
+    public override Faction Faction
     {
         get { return faction; }
         set { faction = value; }
@@ -76,13 +76,6 @@ public class PlayerController : StarshipController
         set { minWeaponRange = value; }
     }
     [SerializeField]
-    private int loadedResources;
-    public override int LoadedResources
-    {
-        get { return loadedResources; }
-        set { loadedResources = value; }
-    }
-    [SerializeField]
     private bool dead;
     public override bool Dead
     {
@@ -114,6 +107,7 @@ public class PlayerController : StarshipController
     {
         rigidBody = GetComponent<Rigidbody>();
         starship = GetComponentInChildren<Starship>();
+        faction = GetComponent<Faction>();
     }
     /// <summary>
     /// (only called if the Object is active): This function is called just after the object is enabled. 
@@ -171,7 +165,7 @@ public class PlayerController : StarshipController
         weapon.Fire();
     }
 
-    public override void AccelerateStarship()
+    public void AccelerateStarship()
     {
         if (ThrustInput >= 0)
             rigidBody.AddForce(transform.forward * ThrustInput * ThrustPower);
@@ -183,7 +177,7 @@ public class PlayerController : StarshipController
         }
     }
 
-    public override void RotateStarship()
+    public void RotateStarship()
     {
         Quaternion rotation = Quaternion.Euler(EulerAngleVelocity * RotationInput * Time.deltaTime);
         rigidBody.MoveRotation(rigidBody.rotation * rotation);

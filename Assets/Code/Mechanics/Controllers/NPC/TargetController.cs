@@ -122,7 +122,7 @@ public class TargetController : MonoBehaviour
     {
         if (targetable == null)      
             return false;     
-        return controller.Faction.CanHarm(targetable.Faction);
+        return controller.Faction.factionAlignment.CanHarm(targetable.Faction.factionAlignment);
     }
 
     /// <summary>

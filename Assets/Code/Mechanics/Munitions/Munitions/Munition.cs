@@ -17,7 +17,7 @@ public class Munition : MonoBehaviour
     [Header("How much damage do I do?")]
     public int munitionDamage;
     [Header("Who do I belong to?")]
-    public StarshipController ownerController;
+    public Faction owningFaction;
 
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class Munition : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        ownerController = GetComponentInParent<WeaponComponent>().Controller;
+        owningFaction = GetComponentInParent<WeaponComponent>().Starship.controller.Faction;
         transform.parent = null;            // Unparent the bullet so it does not follow the Tank that fired it.
         Destroy(gameObject, munitionRange);      // Destroy me after a specified time.
     }
@@ -51,7 +51,7 @@ public class Munition : MonoBehaviour
         {
             StarshipComponent componentHit = collisonObject.GetComponent<StarshipComponent>();
 
-            if (ownerController.Faction.CanHarm(componentHit.Controller.Faction))
+            if (owningFaction.factionAlignment.CanHarm(componentHit.Starship.controller.Faction.factionAlignment))
                 componentHit.ApplyDamage(munitionDamage);
         }
         catch (System.NullReferenceException)

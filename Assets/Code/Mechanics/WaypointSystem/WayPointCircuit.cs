@@ -5,7 +5,7 @@ using UnityEngine;
 public class WayPointCircuit : MonoBehaviour 
 {
     #region Variable Declarations
-	
+    public WayPoint[] waypoints;
 	#endregion
 	#region Initializations
 	// Use this for initialization

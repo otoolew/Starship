@@ -12,14 +12,14 @@ public class WeaponComponent : StarshipComponent
         get { return weaponSchematic; }
         set { weaponSchematic = value; }
     }
-
     [SerializeField]
-    private StarshipController controller;
-    public override StarshipController Controller
+    private Starship starship;
+    public override Starship Starship
     {
-        get { return controller; }
-        set { controller = value; }
+        get { return starship; }
+        set { starship = value; }
     }
+
     [SerializeField]
     private Transform firePoint;
     public Transform FirePoint
@@ -92,6 +92,7 @@ public class WeaponComponent : StarshipComponent
     public void InitComponent()
     {
         GetComponentInChildren<SpriteRenderer>().sprite = weaponSchematic.partSprite;
+        starship = GetComponentInParent<Starship>();
         WeaponRange = weaponSchematic.weaponRange;
         WeaponPower = weaponSchematic.weaponPower;
         WeaponCooldown = weaponSchematic.weaponCooldown;
@@ -147,7 +148,7 @@ public class WeaponComponent : StarshipComponent
 
     public override void ApplyDamage(int amount)
     {
-        Debug.Log(controller + "'s " + gameObject.name + " Hit");
+        Debug.Log(starship.controller + "'s " + gameObject.name + " Hit");
         hP -= amount;
         if (hP <= 0)
         {

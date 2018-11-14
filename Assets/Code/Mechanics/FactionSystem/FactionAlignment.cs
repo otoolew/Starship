@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newFactionAlignment", menuName = "Faction/Alignment")]
 public class FactionAlignment : ScriptableObject,IFactionProvider
 {
+    public string factionName;
     /// <summary>
     /// A collection of other alignment objects that we can harm
     /// </summary>

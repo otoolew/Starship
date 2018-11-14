@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CargoComponent : StarshipComponent
 {
-
     #region Variable Declarations
     [SerializeField]
     private CargoSchematic cargoSchematic;
@@ -14,12 +13,13 @@ public class CargoComponent : StarshipComponent
         set { cargoSchematic = value; }
     }
     [SerializeField]
-    private StarshipController controller;
-    public override StarshipController Controller
+    private Starship starship;
+    public override Starship Starship
     {
-        get { return controller; }
-        set { controller = value; }
+        get { return starship; }
+        set { starship = value; }
     }
+
     [SerializeField]
     private int cargoLoadCapacity;
     public int CargoLoadCapacity
@@ -52,6 +52,11 @@ public class CargoComponent : StarshipComponent
 
     [SerializeField]
     private int resourcesLoaded;
+    public int ResourcesLoaded
+    {
+        get { return resourcesLoaded; }
+        private set { resourcesLoaded = value; }
+    }
 
     [SerializeField]
     private float hP;
@@ -75,7 +80,7 @@ public class CargoComponent : StarshipComponent
     public void InitComponent()
     {
         GetComponentInChildren<SpriteRenderer>().sprite = cargoSchematic.partSprite;
-
+        starship = GetComponentInParent<Starship>();
         CargoLoadCooldown = cargoSchematic.cargoLoadCooldown;
         CargoLoadTimer = cargoSchematic.cargoLoadCooldown;
         CargoLoadCapacity = cargoSchematic.cargoLoadCapacity;
@@ -108,11 +113,12 @@ public class CargoComponent : StarshipComponent
         {
             resourcesLoaded++;
             cargoLoadTimer = cargoLoadCooldown;
-            if(resourcesLoaded > CargoLoadCapacity)
+            if(CargoFull())
             {
+                resourcesLoaded = CargoLoadCapacity;
                 try
                 {
-                    controller.GetComponent<DestinationController>().UpdateDestination(controller.CapitalStarship.ResourceDropPoint);
+                    Starship.controller.GetComponent<NavAgentController>().GoToPosition(Starship.controller.CapitalStarship.ResourceDropPoint.position);
                 }
                 catch (System.Exception)
                 {
@@ -128,7 +134,7 @@ public class CargoComponent : StarshipComponent
         resourcesLoaded = 0;
         try
         {
-            controller.GetComponent<DestinationController>().UpdateDestination(controller.CapitalStarship.resourceFields[0].transform);
+            Starship.controller.GetComponent<NavAgentController>().GoToPosition(Starship.controller.CapitalStarship.resourceFields[0].transform.position);
         }
         catch (System.Exception)
         {
@@ -149,6 +155,10 @@ public class CargoComponent : StarshipComponent
             cargoLoadReady = false;
         }
 
+    }
+    public bool CargoFull()
+    {
+        return resourcesLoaded > CargoLoadCapacity;
     }
     public override void ApplyDamage(int amount)
     {

@@ -6,6 +6,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
 public class NPCController : StarshipController
 {
     #region Properties and Variables
@@ -24,8 +26,8 @@ public class NPCController : StarshipController
         set { starship = value; }
     }
     [SerializeField]
-    private FactionAlignment faction;
-    public override FactionAlignment Faction
+    private Faction faction;
+    public override Faction Faction
     {
         get { return faction; }
         set { faction = value; }
@@ -77,14 +79,6 @@ public class NPCController : StarshipController
     }
 
     [SerializeField]
-    private int loadedResources;
-    public override int LoadedResources
-    {
-        get { return loadedResources; }
-        set { loadedResources = value; }
-    }
-
-    [SerializeField]
     private bool dead;
     public override bool Dead
     {
@@ -95,11 +89,11 @@ public class NPCController : StarshipController
 
     #region NPC Logic Props and Vars
     [SerializeField]
-    private DestinationController destinationController;
-    public DestinationController DestinationController
+    private NavAgentController navAgent;
+    public NavAgentController NavAgent
     {
-        get { return destinationController; }
-        private set { destinationController = value; }
+        get { return navAgent; }
+        private set { navAgent = value; }
     }
 
     [SerializeField]
@@ -154,6 +148,8 @@ public class NPCController : StarshipController
     {
         rigidBody = GetComponent<Rigidbody>();
         starship = GetComponentInChildren<Starship>();
+        navAgent = GetComponent<NavAgentController>();
+        faction = GetComponent<Faction>();
     }
     /// <summary>
     /// (only called if the Object is active): This function is called just after the object is enabled. 
@@ -198,8 +194,8 @@ public class NPCController : StarshipController
     /// </summary>
     void FixedUpdate()
     {
-        AccelerateStarship();
-        RotateStarship();
+        //AccelerateStarship();
+        //RotateStarship();
     }
     private void OnDisable()
     {
@@ -221,58 +217,6 @@ public class NPCController : StarshipController
         }
 
     }
-
-    public override void AccelerateStarship()
-    {
-        if (targetController.CurrentTarget != null)
-        {
-            if (((Vector2.Distance(transform.position, targetController.CurrentTarget.transform.position)) > maxWeaponRange) && (timer > thrustPace))
-            {
-                rigidBody.AddForce((targetController.CurrentTarget.transform.position - transform.position) * ThrustPower);
-                timer = 0;
-            }
-        }
-        else
-        {
-            if((Vector2.Distance(transform.position, destinationController.NavDestination.position)) > stopDistance)
-            {
-                if (timer > thrustPace)
-                {
-                    rigidBody.AddForce((destinationController.NavDestination.position - transform.position) * ThrustPower);
-                    timer = 0;
-                }
-            }
-        }
-
-        // Limit Speed
-        if (rigidBody.velocity.magnitude > MaxVelocity)
-        {
-            rigidBody.velocity = Vector3.ClampMagnitude(rigidBody.velocity, MaxVelocity);
-        }
-    }
-
-    public override void RotateStarship()
-    {
-        Vector3 rotVector = Vector3.zero;
-
-        if (targetController.CurrentTarget != null)
-            rotVector = targetController.CurrentTarget.transform.position - transform.position;
-        else
-            rotVector = destinationController.NavDestination.position - transform.position;
-
-        if(rotVector != Vector3.zero)
-        {
-            rotVector.y = 0f;
-            Quaternion newRotation = Quaternion.LookRotation(rotVector);
-
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, Time.deltaTime * RotationRate);
-        }
-    }
-
-    //public void CargoEmpty()
-    //{
-    //    destinationController.UpdateDestination(capitalStarship.resourceFields[0].transform);
-    //}
 
     public override void HandleDeath()
     {

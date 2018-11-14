@@ -5,15 +5,19 @@ using UnityEngine;
 public class CapitalStarship : MonoBehaviour
 {
     [SerializeField]
-    private FactionAlignment faction;
-    public FactionAlignment Faction
+    private Faction faction;
+    public Faction Faction
     {
         get { return faction; }
         set { faction = value; }
     }
     public int totalResources;
 
+    [SerializeField]
+    public ResourceField PriorityResourceField { get; set; }
+
     public List<ResourceField> resourceFields = new List<ResourceField>();
+
     [SerializeField]
     private Transform resourceDropPoint;
     public Transform ResourceDropPoint
@@ -32,5 +36,6 @@ public class CapitalStarship : MonoBehaviour
 	void Update () {
 		
 	}
+
 
 }

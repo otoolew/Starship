@@ -5,6 +5,7 @@ using UnityEngine;
 public class Starship : MonoBehaviour
 {
     public StarshipController controller;
+
     public StarshipSchematic starshipSchematic;
     public HullComponent hull;
     public EngineComponent[] engines;
@@ -46,7 +47,7 @@ public class Starship : MonoBehaviour
     }
     private void Start()
     {
-
+        
     }
     #endregion
     #region Init
@@ -54,20 +55,17 @@ public class Starship : MonoBehaviour
     {
         // Hull
         hull.HullSchematic = starshipSchematic.hullSchematic;
-        hull.Controller = controller;
 
         hull.onHullDisabled.AddListener(HandleHullDisabled); // Subscribe
 
         // Cargo
         cargo.CargoSchematic = starshipSchematic.cargoSchematic;
-        cargo.Controller = controller;
         // Engines
         if (engines.Length == 0)
             return;
         for (int i = 0; i < engines.Length; i++)
         {
             engines[i].EngineSchematic = starshipSchematic.engineSchematics[i];
-            engines[i].Controller = controller;
             engines[i].onEngineDisabled.AddListener(HandleEngineDisabled); // Subscribe or Listen for EventSceneChangeStart        
             TotalEnginePower += starshipSchematic.engineSchematics[i].enginePower;
             
@@ -82,7 +80,6 @@ public class Starship : MonoBehaviour
             if (weapons[i].WeaponSchematic.weaponRange > MaxWeaponRange)
                 MaxWeaponRange = weapons[i].WeaponSchematic.weaponRange;
 
-            weapons[i].Controller = controller;
             weapons[i].onWeaponDisabled.AddListener(HandleWeaponDisabled);
         }
     }

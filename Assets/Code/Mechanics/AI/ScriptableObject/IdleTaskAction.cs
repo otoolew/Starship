@@ -6,6 +6,6 @@ public class IdleTaskAction : TaskAction {
 
     public override void PerformTask(NPCController npcController)
     {
-        npcController.DestinationController.UpdateDestination(npcController.transform);
+        //npcController.DestinationController.UpdateDestination(npcController.transform);
     }
 }
